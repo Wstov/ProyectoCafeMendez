@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "645954297474",
+    "project_id": "cafe-mendez-r0f5t6",
+    "storage_bucket": "cafe-mendez-r0f5t6.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:645954297474:android:85bedd2420624de82c1e9b",
+        "android_client_info": {
+          "package_name": "com.mycompany.cafemendez"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAI5-SHwndPh7OugATdQ1LRKkzuX3Ns58w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
