@@ -2,26 +2,25 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
-import 'registro_productos_model.dart';
-export 'registro_productos_model.dart';
+import 'editar_producto_model.dart';
+export 'editar_producto_model.dart';
 
-class RegistroProductosWidget extends StatefulWidget {
-  const RegistroProductosWidget({super.key});
+class EditarProductoWidget extends StatefulWidget {
+  const EditarProductoWidget({super.key});
 
   @override
-  State<RegistroProductosWidget> createState() =>
-      _RegistroProductosWidgetState();
+  State<EditarProductoWidget> createState() => _EditarProductoWidgetState();
 }
 
-class _RegistroProductosWidgetState extends State<RegistroProductosWidget> {
-  late RegistroProductosModel _model;
+class _EditarProductoWidgetState extends State<EditarProductoWidget> {
+  late EditarProductoModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => RegistroProductosModel());
+    _model = createModel(context, () => EditarProductoModel());
 
     _model.txtNombreProductoTextController ??= TextEditingController();
     _model.txtNombreProductoFocusNode ??= FocusNode();

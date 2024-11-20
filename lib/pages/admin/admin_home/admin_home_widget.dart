@@ -235,11 +235,18 @@ class _AdminHomeWidgetState extends State<AdminHomeWidget> {
             elevation: 0.0,
           ),
         ),
-        body: const SafeArea(
+        body: SafeArea(
           top: true,
           child: Column(
             mainAxisSize: MainAxisSize.max,
-            children: [],
+            children: [
+              ListView(
+                padding: EdgeInsets.zero,
+                shrinkWrap: true,
+                scrollDirection: Axis.vertical,
+                children: const [],
+              ),
+            ],
           ),
         ),
       ),

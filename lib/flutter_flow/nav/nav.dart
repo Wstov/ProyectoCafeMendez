@@ -71,16 +71,14 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       initialLocation: '/',
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
-      errorBuilder: (context, state) => appStateNotifier.loggedIn
-          ? const HomePageWidget()
-          : const RegistroProductosWidget(),
+      errorBuilder: (context, state) =>
+          appStateNotifier.loggedIn ? const HomePageWidget() : const AccesoWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
-          builder: (context, _) => appStateNotifier.loggedIn
-              ? const HomePageWidget()
-              : const RegistroProductosWidget(),
+          builder: (context, _) =>
+              appStateNotifier.loggedIn ? const HomePageWidget() : const AccesoWidget(),
         ),
         FFRoute(
           name: 'HomePage',
@@ -106,6 +104,26 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'AdminHome',
           path: '/adminHome',
           builder: (context, params) => const AdminHomeWidget(),
+        ),
+        FFRoute(
+          name: 'Index',
+          path: '/index',
+          builder: (context, params) => const IndexWidget(),
+        ),
+        FFRoute(
+          name: 'PaginaProductos',
+          path: '/paginaProductos',
+          builder: (context, params) => const PaginaProductosWidget(),
+        ),
+        FFRoute(
+          name: 'EditarProducto',
+          path: '/editarProducto',
+          builder: (context, params) => const EditarProductoWidget(),
+        ),
+        FFRoute(
+          name: 'Prueba',
+          path: '/prueba',
+          builder: (context, params) => const PruebaWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
@@ -276,7 +294,7 @@ class FFRoute {
 
           if (requireAuth && !appStateNotifier.loggedIn) {
             appStateNotifier.setRedirectLocationIfUnset(state.uri.toString());
-            return '/registroProductos';
+            return '/acceso';
           }
           return null;
         },

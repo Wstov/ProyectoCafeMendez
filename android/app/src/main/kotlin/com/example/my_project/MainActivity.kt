@@ -1,4 +1,4 @@
-package com.mycompany.cafemendez
+package com.cafemendez.cafemendez
 
 import io.flutter.embedding.android.FlutterActivity
 

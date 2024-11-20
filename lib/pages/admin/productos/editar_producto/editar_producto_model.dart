@@ -1,8 +1,8 @@
 import '/flutter_flow/flutter_flow_util.dart';
-import 'registro_productos_widget.dart' show RegistroProductosWidget;
+import 'editar_producto_widget.dart' show EditarProductoWidget;
 import 'package:flutter/material.dart';
 
-class RegistroProductosModel extends FlutterFlowModel<RegistroProductosWidget> {
+class EditarProductoModel extends FlutterFlowModel<EditarProductoWidget> {
   ///  State fields for stateful widgets in this page.
 
   // State field(s) for txtNombreProducto widget.
