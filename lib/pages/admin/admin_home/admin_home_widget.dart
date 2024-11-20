@@ -1,6 +1,10 @@
+import '/auth/firebase_auth/auth_util.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'admin_home_model.dart';
 export 'admin_home_model.dart';
 
@@ -36,7 +40,7 @@ class _AdminHomeWidgetState extends State<AdminHomeWidget> {
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-        drawer: SizedBox(
+        drawer: Container(
           width: MediaQuery.sizeOf(context).width * 0.8,
           child: Drawer(
             elevation: 50.0,
@@ -44,12 +48,12 @@ class _AdminHomeWidgetState extends State<AdminHomeWidget> {
               mainAxisSize: MainAxisSize.max,
               children: [
                 Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 40.0, 0.0, 0.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 40.0, 0.0, 0.0),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.all(10.0),
+                        padding: EdgeInsets.all(10.0),
                         child: InkWell(
                           splashColor: Colors.transparent,
                           focusColor: Colors.transparent,
@@ -87,13 +91,13 @@ class _AdminHomeWidgetState extends State<AdminHomeWidget> {
                   ],
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: EdgeInsets.all(8.0),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       Padding(
                         padding:
-                            const EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
+                            EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
                         child: Icon(
                           Icons.coffee,
                           color: FlutterFlowTheme.of(context).primaryText,
@@ -102,7 +106,7 @@ class _AdminHomeWidgetState extends State<AdminHomeWidget> {
                       ),
                       Padding(
                         padding:
-                            const EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
+                            EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
                         child: Text(
                           'CAFE',
                           style:
@@ -118,13 +122,13 @@ class _AdminHomeWidgetState extends State<AdminHomeWidget> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: EdgeInsets.all(8.0),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       Padding(
                         padding:
-                            const EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
+                            EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
                         child: Icon(
                           Icons.add,
                           color: FlutterFlowTheme.of(context).primaryText,
@@ -133,7 +137,7 @@ class _AdminHomeWidgetState extends State<AdminHomeWidget> {
                       ),
                       Padding(
                         padding:
-                            const EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
+                            EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
                         child: Text(
                           'PRODUCTOS',
                           style:
@@ -149,13 +153,13 @@ class _AdminHomeWidgetState extends State<AdminHomeWidget> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: EdgeInsets.all(8.0),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       Padding(
                         padding:
-                            const EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
+                            EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
                         child: Icon(
                           Icons.people_rounded,
                           color: FlutterFlowTheme.of(context).primaryText,
@@ -164,7 +168,7 @@ class _AdminHomeWidgetState extends State<AdminHomeWidget> {
                       ),
                       Padding(
                         padding:
-                            const EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
+                            EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
                         child: Text(
                           'NOSOTROS',
                           style:
@@ -180,34 +184,48 @@ class _AdminHomeWidgetState extends State<AdminHomeWidget> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      Padding(
-                        padding:
-                            const EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
-                        child: Icon(
-                          Icons.logout,
-                          color: FlutterFlowTheme.of(context).primaryText,
-                          size: 26.0,
+                  padding: EdgeInsets.all(8.0),
+                  child: InkWell(
+                    splashColor: Colors.transparent,
+                    focusColor: Colors.transparent,
+                    hoverColor: Colors.transparent,
+                    highlightColor: Colors.transparent,
+                    onTap: () async {
+                      GoRouter.of(context).prepareAuthEvent();
+                      await authManager.signOut();
+                      GoRouter.of(context).clearRedirectLocation();
+
+                      context.goNamedAuth('Acceso', context.mounted);
+                    },
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              10.0, 0.0, 0.0, 0.0),
+                          child: Icon(
+                            Icons.logout,
+                            color: FlutterFlowTheme.of(context).primaryText,
+                            size: 26.0,
+                          ),
                         ),
-                      ),
-                      Padding(
-                        padding:
-                            const EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
-                        child: Text(
-                          'CERRAR SESIÓN',
-                          style:
-                              FlutterFlowTheme.of(context).bodyMedium.override(
-                                    fontFamily: 'Inter',
-                                    fontSize: 26.0,
-                                    letterSpacing: 0.0,
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              10.0, 0.0, 0.0, 0.0),
+                          child: Text(
+                            'CERRAR SESIÓN',
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  fontFamily: 'Inter',
+                                  fontSize: 26.0,
+                                  letterSpacing: 0.0,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ],
@@ -215,10 +233,10 @@ class _AdminHomeWidgetState extends State<AdminHomeWidget> {
           ),
         ),
         appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(80.0),
+          preferredSize: Size.fromHeight(80.0),
           child: AppBar(
             backgroundColor: Colors.white,
-            iconTheme: const IconThemeData(color: Colors.black),
+            iconTheme: IconThemeData(color: Colors.black),
             automaticallyImplyLeading: true,
             title: Text(
               'Vista de Productos',
@@ -229,7 +247,7 @@ class _AdminHomeWidgetState extends State<AdminHomeWidget> {
                     fontWeight: FontWeight.bold,
                   ),
             ),
-            actions: const [],
+            actions: [],
             centerTitle: true,
             toolbarHeight: 100.0,
             elevation: 0.0,
@@ -244,7 +262,7 @@ class _AdminHomeWidgetState extends State<AdminHomeWidget> {
                 padding: EdgeInsets.zero,
                 shrinkWrap: true,
                 scrollDirection: Axis.vertical,
-                children: const [],
+                children: [],
               ),
             ],
           ),

@@ -1,13 +1,20 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
+import '/backend/backend.dart';
 
 import '/auth/base_auth_user_provider.dart';
 
 import '/index.dart';
+import '/main.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
+import '/flutter_flow/lat_lng.dart';
+import '/flutter_flow/place.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import 'serialization_util.dart';
 
 export 'package:go_router/go_router.dart';
 export 'serialization_util.dart';
@@ -72,58 +79,58 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
       errorBuilder: (context, state) =>
-          appStateNotifier.loggedIn ? const HomePageWidget() : const AccesoWidget(),
+          appStateNotifier.loggedIn ? HomePageWidget() : AccesoWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
           builder: (context, _) =>
-              appStateNotifier.loggedIn ? const HomePageWidget() : const AccesoWidget(),
+              appStateNotifier.loggedIn ? HomePageWidget() : AccesoWidget(),
         ),
         FFRoute(
           name: 'HomePage',
           path: '/homePage',
-          builder: (context, params) => const HomePageWidget(),
+          builder: (context, params) => HomePageWidget(),
         ),
         FFRoute(
           name: 'Acceso',
           path: '/acceso',
-          builder: (context, params) => const AccesoWidget(),
+          builder: (context, params) => AccesoWidget(),
         ),
         FFRoute(
           name: 'productos',
           path: '/productos',
-          builder: (context, params) => const ProductosWidget(),
+          builder: (context, params) => ProductosWidget(),
         ),
         FFRoute(
           name: 'RegistroProductos',
           path: '/registroProductos',
-          builder: (context, params) => const RegistroProductosWidget(),
+          builder: (context, params) => RegistroProductosWidget(),
         ),
         FFRoute(
           name: 'AdminHome',
           path: '/adminHome',
-          builder: (context, params) => const AdminHomeWidget(),
+          builder: (context, params) => AdminHomeWidget(),
         ),
         FFRoute(
           name: 'Index',
           path: '/index',
-          builder: (context, params) => const IndexWidget(),
+          builder: (context, params) => IndexWidget(),
         ),
         FFRoute(
           name: 'PaginaProductos',
           path: '/paginaProductos',
-          builder: (context, params) => const PaginaProductosWidget(),
+          builder: (context, params) => PaginaProductosWidget(),
         ),
         FFRoute(
           name: 'EditarProducto',
           path: '/editarProducto',
-          builder: (context, params) => const EditarProductoWidget(),
+          builder: (context, params) => EditarProductoWidget(),
         ),
         FFRoute(
           name: 'Prueba',
           path: '/prueba',
-          builder: (context, params) => const PruebaWidget(),
+          builder: (context, params) => PruebaWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
@@ -361,7 +368,7 @@ class TransitionInfo {
   final Duration duration;
   final Alignment? alignment;
 
-  static TransitionInfo appDefault() => const TransitionInfo(hasTransition: false);
+  static TransitionInfo appDefault() => TransitionInfo(hasTransition: false);
 }
 
 class RootPageContext {

@@ -2,6 +2,8 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'editar_producto_model.dart';
 export 'editar_producto_model.dart';
 
@@ -55,7 +57,7 @@ class _EditarProductoWidgetState extends State<EditarProductoWidget> {
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-        drawer: SizedBox(
+        drawer: Container(
           width: MediaQuery.sizeOf(context).width * 0.8,
           child: Drawer(
             elevation: 50.0,
@@ -63,12 +65,12 @@ class _EditarProductoWidgetState extends State<EditarProductoWidget> {
               mainAxisSize: MainAxisSize.max,
               children: [
                 Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 40.0, 0.0, 0.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 40.0, 0.0, 0.0),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.all(10.0),
+                        padding: EdgeInsets.all(10.0),
                         child: InkWell(
                           splashColor: Colors.transparent,
                           focusColor: Colors.transparent,
@@ -106,13 +108,13 @@ class _EditarProductoWidgetState extends State<EditarProductoWidget> {
                   ],
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: EdgeInsets.all(8.0),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       Padding(
                         padding:
-                            const EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
+                            EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
                         child: Icon(
                           Icons.coffee,
                           color: FlutterFlowTheme.of(context).primaryText,
@@ -121,7 +123,7 @@ class _EditarProductoWidgetState extends State<EditarProductoWidget> {
                       ),
                       Padding(
                         padding:
-                            const EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
+                            EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
                         child: Text(
                           'CAFE',
                           style:
@@ -137,13 +139,13 @@ class _EditarProductoWidgetState extends State<EditarProductoWidget> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: EdgeInsets.all(8.0),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       Padding(
                         padding:
-                            const EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
+                            EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
                         child: Icon(
                           Icons.add,
                           color: FlutterFlowTheme.of(context).primaryText,
@@ -152,7 +154,7 @@ class _EditarProductoWidgetState extends State<EditarProductoWidget> {
                       ),
                       Padding(
                         padding:
-                            const EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
+                            EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
                         child: Text(
                           'PRODUCTOS',
                           style:
@@ -168,13 +170,13 @@ class _EditarProductoWidgetState extends State<EditarProductoWidget> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: EdgeInsets.all(8.0),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       Padding(
                         padding:
-                            const EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
+                            EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
                         child: Icon(
                           Icons.people_rounded,
                           color: FlutterFlowTheme.of(context).primaryText,
@@ -183,7 +185,7 @@ class _EditarProductoWidgetState extends State<EditarProductoWidget> {
                       ),
                       Padding(
                         padding:
-                            const EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
+                            EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
                         child: Text(
                           'NOSOTROS',
                           style:
@@ -199,13 +201,13 @@ class _EditarProductoWidgetState extends State<EditarProductoWidget> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: EdgeInsets.all(8.0),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       Padding(
                         padding:
-                            const EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
+                            EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
                         child: Icon(
                           Icons.logout,
                           color: FlutterFlowTheme.of(context).primaryText,
@@ -214,7 +216,7 @@ class _EditarProductoWidgetState extends State<EditarProductoWidget> {
                       ),
                       Padding(
                         padding:
-                            const EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
+                            EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
                         child: Text(
                           'CERRAR SESIÓN',
                           style:
@@ -234,10 +236,10 @@ class _EditarProductoWidgetState extends State<EditarProductoWidget> {
           ),
         ),
         appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(80.0),
+          preferredSize: Size.fromHeight(80.0),
           child: AppBar(
             backgroundColor: Colors.white,
-            iconTheme: const IconThemeData(color: Colors.black),
+            iconTheme: IconThemeData(color: Colors.black),
             automaticallyImplyLeading: true,
             title: Text(
               'Registro de Productos',
@@ -248,7 +250,7 @@ class _EditarProductoWidgetState extends State<EditarProductoWidget> {
                     fontWeight: FontWeight.bold,
                   ),
             ),
-            actions: const [],
+            actions: [],
             centerTitle: true,
             toolbarHeight: 100.0,
             elevation: 0.0,
@@ -264,8 +266,8 @@ class _EditarProductoWidgetState extends State<EditarProductoWidget> {
                 children: [
                   Expanded(
                     child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: SizedBox(
+                      padding: EdgeInsets.all(8.0),
+                      child: Container(
                         width: 200.0,
                         child: TextFormField(
                           controller: _model.txtNombreProductoTextController,
@@ -289,7 +291,7 @@ class _EditarProductoWidgetState extends State<EditarProductoWidget> {
                                   letterSpacing: 0.0,
                                 ),
                             enabledBorder: OutlineInputBorder(
-                              borderSide: const BorderSide(
+                              borderSide: BorderSide(
                                 color: Color(0x00000000),
                                 width: 1.0,
                               ),
@@ -341,8 +343,8 @@ class _EditarProductoWidgetState extends State<EditarProductoWidget> {
                 children: [
                   Expanded(
                     child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: SizedBox(
+                      padding: EdgeInsets.all(8.0),
+                      child: Container(
                         width: 200.0,
                         child: TextFormField(
                           controller: _model.txtDetalleProductoTextController,
@@ -366,7 +368,7 @@ class _EditarProductoWidgetState extends State<EditarProductoWidget> {
                                   letterSpacing: 0.0,
                                 ),
                             enabledBorder: OutlineInputBorder(
-                              borderSide: const BorderSide(
+                              borderSide: BorderSide(
                                 color: Color(0x00000000),
                                 width: 1.0,
                               ),
@@ -418,8 +420,8 @@ class _EditarProductoWidgetState extends State<EditarProductoWidget> {
                 children: [
                   Expanded(
                     child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: SizedBox(
+                      padding: EdgeInsets.all(8.0),
+                      child: Container(
                         width: 200.0,
                         child: TextFormField(
                           controller: _model.txtPresentacionTextController,
@@ -443,7 +445,7 @@ class _EditarProductoWidgetState extends State<EditarProductoWidget> {
                                   letterSpacing: 0.0,
                                 ),
                             enabledBorder: OutlineInputBorder(
-                              borderSide: const BorderSide(
+                              borderSide: BorderSide(
                                 color: Color(0x00000000),
                                 width: 1.0,
                               ),
@@ -495,8 +497,8 @@ class _EditarProductoWidgetState extends State<EditarProductoWidget> {
                 children: [
                   Expanded(
                     child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: SizedBox(
+                      padding: EdgeInsets.all(8.0),
+                      child: Container(
                         width: 200.0,
                         child: TextFormField(
                           controller: _model.txtTipoGranoTextController,
@@ -520,7 +522,7 @@ class _EditarProductoWidgetState extends State<EditarProductoWidget> {
                                   letterSpacing: 0.0,
                                 ),
                             enabledBorder: OutlineInputBorder(
-                              borderSide: const BorderSide(
+                              borderSide: BorderSide(
                                 color: Color(0x00000000),
                                 width: 1.0,
                               ),
@@ -571,8 +573,8 @@ class _EditarProductoWidgetState extends State<EditarProductoWidget> {
                 children: [
                   Expanded(
                     child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: SizedBox(
+                      padding: EdgeInsets.all(8.0),
+                      child: Container(
                         width: 200.0,
                         child: TextFormField(
                           controller: _model.txtCantidadTextController,
@@ -596,7 +598,7 @@ class _EditarProductoWidgetState extends State<EditarProductoWidget> {
                                   letterSpacing: 0.0,
                                 ),
                             enabledBorder: OutlineInputBorder(
-                              borderSide: const BorderSide(
+                              borderSide: BorderSide(
                                 color: Color(0x00000000),
                                 width: 1.0,
                               ),
@@ -647,8 +649,8 @@ class _EditarProductoWidgetState extends State<EditarProductoWidget> {
                 children: [
                   Expanded(
                     child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: SizedBox(
+                      padding: EdgeInsets.all(8.0),
+                      child: Container(
                         width: 200.0,
                         child: TextFormField(
                           controller: _model.txtPrecioTextController,
@@ -672,7 +674,7 @@ class _EditarProductoWidgetState extends State<EditarProductoWidget> {
                                   letterSpacing: 0.0,
                                 ),
                             enabledBorder: OutlineInputBorder(
-                              borderSide: const BorderSide(
+                              borderSide: BorderSide(
                                 color: Color(0x00000000),
                                 width: 1.0,
                               ),
@@ -719,7 +721,7 @@ class _EditarProductoWidgetState extends State<EditarProductoWidget> {
                 ],
               ),
               Padding(
-                padding: const EdgeInsets.all(10.0),
+                padding: EdgeInsets.all(10.0),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -737,14 +739,14 @@ class _EditarProductoWidgetState extends State<EditarProductoWidget> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.all(10.0),
+                padding: EdgeInsets.all(10.0),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Padding(
                       padding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 20.0, 0.0),
+                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 20.0, 0.0),
                       child: FFButtonWidget(
                         onPressed: () {
                           print('Button pressed ...');
@@ -752,9 +754,9 @@ class _EditarProductoWidgetState extends State<EditarProductoWidget> {
                         text: 'Cargar',
                         options: FFButtonOptions(
                           height: 40.0,
-                          padding: const EdgeInsetsDirectional.fromSTEB(
+                          padding: EdgeInsetsDirectional.fromSTEB(
                               16.0, 0.0, 16.0, 0.0),
-                          iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                          iconPadding: EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 0.0, 0.0),
                           color: FlutterFlowTheme.of(context).primaryText,
                           textStyle:
@@ -770,7 +772,7 @@ class _EditarProductoWidgetState extends State<EditarProductoWidget> {
                     ),
                     Padding(
                       padding:
-                          const EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 0.0, 0.0),
+                          EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 0.0, 0.0),
                       child: FFButtonWidget(
                         onPressed: () {
                           print('Button pressed ...');
@@ -778,9 +780,9 @@ class _EditarProductoWidgetState extends State<EditarProductoWidget> {
                         text: 'Guardar',
                         options: FFButtonOptions(
                           height: 40.0,
-                          padding: const EdgeInsetsDirectional.fromSTEB(
+                          padding: EdgeInsetsDirectional.fromSTEB(
                               16.0, 0.0, 16.0, 0.0),
-                          iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                          iconPadding: EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 0.0, 0.0),
                           color: FlutterFlowTheme.of(context).primaryText,
                           textStyle:

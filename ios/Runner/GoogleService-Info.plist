@@ -2,18 +2,24 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>CLIENT_ID</key>
+	<string>890908087712-8a27fujbnpm61bjvq13u9hl3l9pk9mrr.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.890908087712-8a27fujbnpm61bjvq13u9hl3l9pk9mrr</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>890908087712-pscku08b08kn75g7lv3vf7j75orfuau8.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
-	<string>AIzaSyBak99WHXHB_vlsHZtO6dVXbVCwd_N7g5Y</string>
+	<string>AIzaSyD9DN3vmL4qI-jK922bWtKCWNxOdZThefQ</string>
 	<key>GCM_SENDER_ID</key>
-	<string>645954297474</string>
+	<string>890908087712</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.mycompany.cafemendez</string>
+	<string>com.mendezcompany.cafemendez</string>
 	<key>PROJECT_ID</key>
-	<string>cafe-mendez-r0f5t6</string>
+	<string>cafe-mendez</string>
 	<key>STORAGE_BUCKET</key>
-	<string>cafe-mendez-r0f5t6.firebasestorage.app</string>
+	<string>cafe-mendez.firebasestorage.app</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -25,6 +31,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:645954297474:ios:89c3f1d7fe8ff6ef2c1e9b</string>
+	<string>1:890908087712:ios:ff19391c26b5a4d5c480c5</string>
 </dict>
 </plist>

@@ -1,9 +1,12 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart'
     as smooth_page_indicator;
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'index_model.dart';
 export 'index_model.dart';
 
@@ -40,7 +43,7 @@ class _IndexWidgetState extends State<IndexWidget> {
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(80.0),
+          preferredSize: Size.fromHeight(80.0),
           child: AppBar(
             backgroundColor: Colors.white,
             iconTheme:
@@ -67,7 +70,7 @@ class _IndexWidgetState extends State<IndexWidget> {
                 children: [
                   Padding(
                     padding:
-                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 10.0, 0.0),
+                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 10.0, 0.0),
                     child: Icon(
                       Icons.shopping_cart,
                       color: FlutterFlowTheme.of(context).primaryText,
@@ -76,7 +79,7 @@ class _IndexWidgetState extends State<IndexWidget> {
                   ),
                   Padding(
                     padding:
-                        const EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
+                        EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
                     child: Icon(
                       Icons.search,
                       color: FlutterFlowTheme.of(context).primaryText,
@@ -101,13 +104,13 @@ class _IndexWidgetState extends State<IndexWidget> {
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     Expanded(
-                      child: SizedBox(
+                      child: Container(
                         width: MediaQuery.sizeOf(context).width * 5.0,
                         height: 217.0,
                         child: Stack(
                           children: [
                             Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
+                              padding: EdgeInsetsDirectional.fromSTEB(
                                   0.0, 0.0, 0.0, 40.0),
                               child: PageView(
                                 controller: _model.pageViewController ??=
@@ -118,13 +121,13 @@ class _IndexWidgetState extends State<IndexWidget> {
                                     mainAxisSize: MainAxisSize.max,
                                     children: [
                                       Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
                                             0.0, 15.0, 0.0, 0.0),
                                         child: Container(
                                           width: 350.0,
                                           height: 149.0,
                                           decoration: BoxDecoration(
-                                            gradient: const LinearGradient(
+                                            gradient: LinearGradient(
                                               colors: [
                                                 Color(0xFFEAE9EF),
                                                 Color(0xD0EDCB6C),
@@ -141,7 +144,7 @@ class _IndexWidgetState extends State<IndexWidget> {
                                           ),
                                           child: Padding(
                                             padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
+                                                EdgeInsetsDirectional.fromSTEB(
                                                     8.0, 0.0, 8.0, 0.0),
                                             child: Row(
                                               mainAxisSize: MainAxisSize.max,
@@ -149,7 +152,7 @@ class _IndexWidgetState extends State<IndexWidget> {
                                                   MainAxisAlignment.spaceEvenly,
                                               children: [
                                                 Padding(
-                                                  padding: const EdgeInsetsDirectional
+                                                  padding: EdgeInsetsDirectional
                                                       .fromSTEB(
                                                           0.0, 10.0, 0.0, 10.0),
                                                   child: Column(
@@ -182,7 +185,7 @@ class _IndexWidgetState extends State<IndexWidget> {
                                                       ),
                                                       Padding(
                                                         padding:
-                                                            const EdgeInsetsDirectional
+                                                            EdgeInsetsDirectional
                                                                 .fromSTEB(
                                                                     0.0,
                                                                     8.0,
@@ -246,7 +249,7 @@ class _IndexWidgetState extends State<IndexWidget> {
                                       ),
                                     ],
                                   ),
-                                  const Column(
+                                  Column(
                                     mainAxisSize: MainAxisSize.max,
                                     children: [],
                                   ),
@@ -254,9 +257,9 @@ class _IndexWidgetState extends State<IndexWidget> {
                               ),
                             ),
                             Align(
-                              alignment: const AlignmentDirectional(0.0, 1.0),
+                              alignment: AlignmentDirectional(0.0, 1.0),
                               child: Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                padding: EdgeInsetsDirectional.fromSTEB(
                                     0.0, 0.0, 0.0, 16.0),
                                 child:
                                     smooth_page_indicator.SmoothPageIndicator(
@@ -268,7 +271,7 @@ class _IndexWidgetState extends State<IndexWidget> {
                                     await _model.pageViewController!
                                         .animateToPage(
                                       i,
-                                      duration: const Duration(milliseconds: 500),
+                                      duration: Duration(milliseconds: 500),
                                       curve: Curves.ease,
                                     );
                                     safeSetState(() {});
@@ -294,7 +297,7 @@ class _IndexWidgetState extends State<IndexWidget> {
                   ],
                 ),
                 Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 8.0, 0.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 8.0, 0.0),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -303,7 +306,7 @@ class _IndexWidgetState extends State<IndexWidget> {
                         'Categorias',
                         style: FlutterFlowTheme.of(context).bodyMedium.override(
                               fontFamily: 'Inter',
-                              color: const Color(0xFFF96E04),
+                              color: Color(0xFFF96E04),
                               letterSpacing: 0.0,
                               fontWeight: FontWeight.bold,
                             ),
@@ -312,7 +315,7 @@ class _IndexWidgetState extends State<IndexWidget> {
                         'Ver Todas',
                         style: FlutterFlowTheme.of(context).bodyMedium.override(
                               fontFamily: 'Inter',
-                              color: const Color(0xFFF96E04),
+                              color: Color(0xFFF96E04),
                               letterSpacing: 0.0,
                               fontWeight: FontWeight.bold,
                             ),
@@ -321,18 +324,18 @@ class _IndexWidgetState extends State<IndexWidget> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Expanded(
                         child: Align(
-                          alignment: const AlignmentDirectional(0.0, 0.0),
+                          alignment: AlignmentDirectional(0.0, 0.0),
                           child: Container(
                             width: 350.0,
                             height: 150.0,
-                            decoration: const BoxDecoration(
+                            decoration: BoxDecoration(
                               color: Color(0xFFEDEDED),
                               shape: BoxShape.rectangle,
                             ),
@@ -357,12 +360,12 @@ class _IndexWidgetState extends State<IndexWidget> {
                                         children: [
                                           Padding(
                                             padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
+                                                EdgeInsetsDirectional.fromSTEB(
                                                     0.0, 18.0, 0.0, 0.0),
                                             child: Container(
                                               width: 80.0,
                                               height: 80.0,
-                                              decoration: const BoxDecoration(
+                                              decoration: BoxDecoration(
                                                 gradient: LinearGradient(
                                                   colors: [
                                                     Color(0xFF080808),
@@ -386,7 +389,7 @@ class _IndexWidgetState extends State<IndexWidget> {
                                                 ),
                                               ),
                                               child: Align(
-                                                alignment: const AlignmentDirectional(
+                                                alignment: AlignmentDirectional(
                                                     0.0, 0.0),
                                                 child: Icon(
                                                   Icons.coffee_maker_outlined,
@@ -400,7 +403,7 @@ class _IndexWidgetState extends State<IndexWidget> {
                                           ),
                                           Padding(
                                             padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
+                                                EdgeInsetsDirectional.fromSTEB(
                                                     0.0, 5.0, 0.0, 0.0),
                                             child: Text(
                                               'Metodos de\nExtraccion',
@@ -427,7 +430,7 @@ class _IndexWidgetState extends State<IndexWidget> {
                                           Container(
                                             width: 80.0,
                                             height: 80.0,
-                                            decoration: const BoxDecoration(
+                                            decoration: BoxDecoration(
                                               gradient: LinearGradient(
                                                 colors: [
                                                   Color(0xFF080808),
@@ -449,7 +452,7 @@ class _IndexWidgetState extends State<IndexWidget> {
                                               ),
                                             ),
                                             child: Align(
-                                              alignment: const AlignmentDirectional(
+                                              alignment: AlignmentDirectional(
                                                   0.0, 0.0),
                                               child: Icon(
                                                 Icons.coffee_rounded,
@@ -462,7 +465,7 @@ class _IndexWidgetState extends State<IndexWidget> {
                                           ),
                                           Padding(
                                             padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
+                                                EdgeInsetsDirectional.fromSTEB(
                                                     0.0, 5.0, 0.0, 0.0),
                                             child: Text(
                                               'Todos los Café',
@@ -488,7 +491,7 @@ class _IndexWidgetState extends State<IndexWidget> {
                                           Container(
                                             width: 80.0,
                                             height: 80.0,
-                                            decoration: const BoxDecoration(
+                                            decoration: BoxDecoration(
                                               gradient: LinearGradient(
                                                 colors: [
                                                   Color(0xFF080808),
@@ -510,7 +513,7 @@ class _IndexWidgetState extends State<IndexWidget> {
                                               ),
                                             ),
                                             child: Align(
-                                              alignment: const AlignmentDirectional(
+                                              alignment: AlignmentDirectional(
                                                   0.0, 0.0),
                                               child: Icon(
                                                 Icons.menu_book,
@@ -523,7 +526,7 @@ class _IndexWidgetState extends State<IndexWidget> {
                                           ),
                                           Padding(
                                             padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
+                                                EdgeInsetsDirectional.fromSTEB(
                                                     0.0, 5.0, 0.0, 0.0),
                                             child: Text(
                                               'Recetas con Café',
@@ -548,7 +551,7 @@ class _IndexWidgetState extends State<IndexWidget> {
                                           Container(
                                             width: 80.0,
                                             height: 80.0,
-                                            decoration: const BoxDecoration(
+                                            decoration: BoxDecoration(
                                               gradient: LinearGradient(
                                                 colors: [
                                                   Color(0xFF080808),
@@ -570,7 +573,7 @@ class _IndexWidgetState extends State<IndexWidget> {
                                               ),
                                             ),
                                             child: Align(
-                                              alignment: const AlignmentDirectional(
+                                              alignment: AlignmentDirectional(
                                                   0.0, 0.0),
                                               child: Icon(
                                                 Icons.phone_in_talk,
@@ -583,7 +586,7 @@ class _IndexWidgetState extends State<IndexWidget> {
                                           ),
                                           Padding(
                                             padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
+                                                EdgeInsetsDirectional.fromSTEB(
                                                     0.0, 5.0, 0.0, 0.0),
                                             child: Text(
                                               'Contactenos',
@@ -608,7 +611,7 @@ class _IndexWidgetState extends State<IndexWidget> {
                                           Container(
                                             width: 80.0,
                                             height: 80.0,
-                                            decoration: const BoxDecoration(
+                                            decoration: BoxDecoration(
                                               gradient: LinearGradient(
                                                 colors: [
                                                   Color(0xFF080808),
@@ -630,7 +633,7 @@ class _IndexWidgetState extends State<IndexWidget> {
                                               ),
                                             ),
                                             child: Align(
-                                              alignment: const AlignmentDirectional(
+                                              alignment: AlignmentDirectional(
                                                   0.0, 0.0),
                                               child: Icon(
                                                 Icons.question_mark,
@@ -643,7 +646,7 @@ class _IndexWidgetState extends State<IndexWidget> {
                                           ),
                                           Padding(
                                             padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
+                                                EdgeInsetsDirectional.fromSTEB(
                                                     0.0, 5.0, 0.0, 0.0),
                                             child: Text(
                                               'FAQS',
@@ -660,7 +663,7 @@ class _IndexWidgetState extends State<IndexWidget> {
                                           ),
                                         ],
                                       ),
-                                    ].divide(const SizedBox(width: 25.0)),
+                                    ].divide(SizedBox(width: 25.0)),
                                   ),
                                 ),
                               ],
@@ -672,7 +675,7 @@ class _IndexWidgetState extends State<IndexWidget> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(8.0, 10.0, 8.0, 0.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(8.0, 10.0, 8.0, 0.0),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -681,7 +684,7 @@ class _IndexWidgetState extends State<IndexWidget> {
                         'Productos Populares',
                         style: FlutterFlowTheme.of(context).bodyMedium.override(
                               fontFamily: 'Inter',
-                              color: const Color(0xFFF96E04),
+                              color: Color(0xFFF96E04),
                               letterSpacing: 0.0,
                               fontWeight: FontWeight.bold,
                             ),
@@ -690,7 +693,7 @@ class _IndexWidgetState extends State<IndexWidget> {
                         'Ver Todos',
                         style: FlutterFlowTheme.of(context).bodyMedium.override(
                               fontFamily: 'Inter',
-                              color: const Color(0xFFF96E04),
+                              color: Color(0xFFF96E04),
                               letterSpacing: 0.0,
                               fontWeight: FontWeight.bold,
                             ),
@@ -700,10 +703,10 @@ class _IndexWidgetState extends State<IndexWidget> {
                 ),
                 Expanded(
                   child: Padding(
-                    padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 5.0, 0.0),
+                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 5.0, 0.0),
                     child: MasonryGridView.builder(
                       gridDelegate:
-                          const SliverSimpleGridDelegateWithFixedCrossAxisCount(
+                          SliverSimpleGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
                       ),
                       mainAxisSpacing: 10.0,
@@ -715,7 +718,7 @@ class _IndexWidgetState extends State<IndexWidget> {
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
                                   Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
                                         15.0, 20.0, 0.0, 0.0),
                                     child: Container(
                                       width: 180.0,
@@ -735,7 +738,7 @@ class _IndexWidgetState extends State<IndexWidget> {
                                     ),
                                   ),
                                   Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
                                         10.0, 0.0, 0.0, 0.0),
                                     child: Row(
                                       mainAxisSize: MainAxisSize.max,
@@ -752,7 +755,7 @@ class _IndexWidgetState extends State<IndexWidget> {
                                                 fontWeight: FontWeight.bold,
                                               ),
                                         ),
-                                        const Icon(
+                                        Icon(
                                           Icons.star_half,
                                           color: Color(0xFFE38844),
                                           size: 24.0,
@@ -784,7 +787,7 @@ class _IndexWidgetState extends State<IndexWidget> {
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
                                   Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
                                         15.0, 20.0, 0.0, 0.0),
                                     child: Container(
                                       width: 180.0,
@@ -804,7 +807,7 @@ class _IndexWidgetState extends State<IndexWidget> {
                                     ),
                                   ),
                                   Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
                                         10.0, 0.0, 0.0, 0.0),
                                     child: Row(
                                       mainAxisSize: MainAxisSize.max,
@@ -821,7 +824,7 @@ class _IndexWidgetState extends State<IndexWidget> {
                                                 fontWeight: FontWeight.bold,
                                               ),
                                         ),
-                                        const Icon(
+                                        Icon(
                                           Icons.star_half,
                                           color: Color(0xFFE38844),
                                           size: 24.0,
@@ -853,7 +856,7 @@ class _IndexWidgetState extends State<IndexWidget> {
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
                                   Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
                                         15.0, 20.0, 0.0, 0.0),
                                     child: Container(
                                       width: 180.0,
@@ -873,7 +876,7 @@ class _IndexWidgetState extends State<IndexWidget> {
                                     ),
                                   ),
                                   Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
                                         10.0, 0.0, 0.0, 0.0),
                                     child: Row(
                                       mainAxisSize: MainAxisSize.max,
@@ -890,7 +893,7 @@ class _IndexWidgetState extends State<IndexWidget> {
                                                 fontWeight: FontWeight.bold,
                                               ),
                                         ),
-                                        const Icon(
+                                        Icon(
                                           Icons.star_half,
                                           color: Color(0xFFE38844),
                                           size: 24.0,
@@ -922,7 +925,7 @@ class _IndexWidgetState extends State<IndexWidget> {
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
                                   Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
                                         15.0, 20.0, 0.0, 0.0),
                                     child: Container(
                                       width: 180.0,
@@ -942,7 +945,7 @@ class _IndexWidgetState extends State<IndexWidget> {
                                     ),
                                   ),
                                   Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
                                         10.0, 0.0, 0.0, 0.0),
                                     child: Row(
                                       mainAxisSize: MainAxisSize.max,
@@ -959,7 +962,7 @@ class _IndexWidgetState extends State<IndexWidget> {
                                                 fontWeight: FontWeight.bold,
                                               ),
                                         ),
-                                        const Icon(
+                                        Icon(
                                           Icons.star_half,
                                           color: Color(0xFFE38844),
                                           size: 24.0,
