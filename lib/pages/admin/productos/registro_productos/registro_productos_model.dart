@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 class RegistroProductosModel extends FlutterFlowModel<RegistroProductosWidget> {
   ///  State fields for stateful widgets in this page.
 
+  final formKey = GlobalKey<FormState>();
   // State field(s) for txtNombreProducto widget.
   FocusNode? txtNombreProductoFocusNode;
   TextEditingController? txtNombreProductoTextController;

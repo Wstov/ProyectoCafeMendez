@@ -124,6 +124,7 @@ class _FaqsWidgetState extends State<FaqsWidget> {
                       style: FlutterFlowTheme.of(context).bodyMedium.override(
                             fontFamily: 'Inter',
                             letterSpacing: 0.0,
+                            fontWeight: FontWeight.w500,
                           ),
                     ),
                   ],

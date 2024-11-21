@@ -295,114 +295,160 @@ class _AdminHomeWidgetState extends State<AdminHomeWidget> {
                     itemBuilder: (context, listViewIndex) {
                       final listViewProductosRecord =
                           listViewProductosRecordList[listViewIndex];
-                      return Slidable(
-                        endActionPane: ActionPane(
-                          motion: const ScrollMotion(),
-                          extentRatio: 0.5,
-                          children: [
-                            SlidableAction(
-                              label: 'Editar',
-                              backgroundColor:
-                                  FlutterFlowTheme.of(context).accent3,
-                              icon: Icons.edit_document,
-                              onPressed: (_) {
-                                print('SlidableActionWidget pressed ...');
-                              },
-                            ),
-                            SlidableAction(
-                              label: 'Eliminar',
-                              backgroundColor:
-                                  FlutterFlowTheme.of(context).error,
-                              icon: Icons.delete_outline_rounded,
-                              onPressed: (_) async {
-                                var confirmDialogResponse =
-                                    await showDialog<bool>(
-                                          context: context,
-                                          builder: (alertDialogContext) {
-                                            return AlertDialog(
-                                              title: const Text('¡Aviso!'),
-                                              content: const Text(
-                                                  '¿Desea eliminar el producto?'),
-                                              actions: [
-                                                TextButton(
-                                                  onPressed: () =>
-                                                      Navigator.pop(
-                                                          alertDialogContext,
-                                                          false),
-                                                  child: const Text('Cancel'),
-                                                ),
-                                                TextButton(
-                                                  onPressed: () =>
-                                                      Navigator.pop(
-                                                          alertDialogContext,
-                                                          true),
-                                                  child: const Text('Confirm'),
-                                                ),
-                                              ],
+                      return Row(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Column(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(8.0),
+                                child: Image.network(
+                                  listViewProductosRecord.imagen,
+                                  width: 100.0,
+                                  height: 100.0,
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            ],
+                          ),
+                          Expanded(
+                            child: Column(
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                Slidable(
+                                  endActionPane: ActionPane(
+                                    motion: const ScrollMotion(),
+                                    extentRatio: 0.5,
+                                    children: [
+                                      SlidableAction(
+                                        label: 'Editar',
+                                        backgroundColor: const Color(0x63EE8B60),
+                                        icon: Icons.edit_document,
+                                        onPressed: (_) async {
+                                          context.pushNamed(
+                                            'EditarProducto',
+                                            queryParameters: {
+                                              'parametrosProducto':
+                                                  serializeParam(
+                                                listViewProductosRecord,
+                                                ParamType.Document,
+                                              ),
+                                            }.withoutNulls,
+                                            extra: <String, dynamic>{
+                                              'parametrosProducto':
+                                                  listViewProductosRecord,
+                                            },
+                                          );
+                                        },
+                                      ),
+                                      SlidableAction(
+                                        label: 'Eliminar',
+                                        backgroundColor:
+                                            FlutterFlowTheme.of(context).error,
+                                        icon: Icons.delete_outline_rounded,
+                                        onPressed: (_) async {
+                                          var confirmDialogResponse =
+                                              await showDialog<bool>(
+                                                    context: context,
+                                                    builder:
+                                                        (alertDialogContext) {
+                                                      return AlertDialog(
+                                                        title: const Text('¡Aviso!'),
+                                                        content: const Text(
+                                                            '¿Seguro desea eliminar el producto?'),
+                                                        actions: [
+                                                          TextButton(
+                                                            onPressed: () =>
+                                                                Navigator.pop(
+                                                                    alertDialogContext,
+                                                                    false),
+                                                            child: const Text(
+                                                                'Cancelar'),
+                                                          ),
+                                                          TextButton(
+                                                            onPressed: () =>
+                                                                Navigator.pop(
+                                                                    alertDialogContext,
+                                                                    true),
+                                                            child:
+                                                                const Text('Aceptar'),
+                                                          ),
+                                                        ],
+                                                      );
+                                                    },
+                                                  ) ??
+                                                  false;
+                                          if (confirmDialogResponse) {
+                                            await listViewProductosRecord
+                                                .reference
+                                                .delete();
+                                            await showDialog(
+                                              context: context,
+                                              builder: (alertDialogContext) {
+                                                return AlertDialog(
+                                                  content: const Text(
+                                                      'Producto eliminado con exito.'),
+                                                  actions: [
+                                                    TextButton(
+                                                      onPressed: () =>
+                                                          Navigator.pop(
+                                                              alertDialogContext),
+                                                      child: const Text('Aceptar'),
+                                                    ),
+                                                  ],
+                                                );
+                                              },
                                             );
-                                          },
-                                        ) ??
-                                        false;
-                                if (confirmDialogResponse) {
-                                  await listViewProductosRecord.reference
-                                      .delete();
-                                  await showDialog(
-                                    context: context,
-                                    builder: (alertDialogContext) {
-                                      return AlertDialog(
-                                        content: const Text(
-                                            'Producto eliminado correctamente.'),
-                                        actions: [
-                                          TextButton(
-                                            onPressed: () => Navigator.pop(
-                                                alertDialogContext),
-                                            child: const Text('Ok'),
-                                          ),
-                                        ],
-                                      );
-                                    },
-                                  );
-                                }
-                              },
-                            ),
-                          ],
-                        ),
-                        child: Material(
-                          color: Colors.transparent,
-                          child: ListTile(
-                            title: Text(
-                              listViewProductosRecord.nombre,
-                              style: FlutterFlowTheme.of(context)
-                                  .titleLarge
-                                  .override(
-                                    fontFamily: 'Inter Tight',
-                                    letterSpacing: 0.0,
+                                          }
+                                        },
+                                      ),
+                                    ],
                                   ),
-                            ),
-                            subtitle: Text(
-                              listViewProductosRecord.tipoGrano,
-                              style: FlutterFlowTheme.of(context)
-                                  .labelMedium
-                                  .override(
-                                    fontFamily: 'Inter',
-                                    letterSpacing: 0.0,
+                                  child: Material(
+                                    color: Colors.transparent,
+                                    child: ListTile(
+                                      title: Text(
+                                        listViewProductosRecord.nombre,
+                                        style: FlutterFlowTheme.of(context)
+                                            .titleLarge
+                                            .override(
+                                              fontFamily: 'Inter Tight',
+                                              letterSpacing: 0.0,
+                                            ),
+                                      ),
+                                      subtitle: Text(
+                                        listViewProductosRecord.tipoGrano,
+                                        style: FlutterFlowTheme.of(context)
+                                            .labelMedium
+                                            .override(
+                                              fontFamily: 'Inter',
+                                              letterSpacing: 0.0,
+                                            ),
+                                      ),
+                                      trailing: Icon(
+                                        Icons.arrow_forward_ios_rounded,
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondaryText,
+                                        size: 24.0,
+                                      ),
+                                      tileColor: FlutterFlowTheme.of(context)
+                                          .secondaryBackground,
+                                      dense: false,
+                                      contentPadding:
+                                          const EdgeInsetsDirectional.fromSTEB(
+                                              12.0, 18.5, 12.0, 18.5),
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(8.0),
+                                      ),
+                                    ),
                                   ),
-                            ),
-                            trailing: Icon(
-                              Icons.arrow_forward_ios_rounded,
-                              color: FlutterFlowTheme.of(context).secondaryText,
-                              size: 24.0,
-                            ),
-                            tileColor: FlutterFlowTheme.of(context)
-                                .secondaryBackground,
-                            dense: false,
-                            contentPadding: const EdgeInsetsDirectional.fromSTEB(
-                                12.0, 0.0, 12.0, 0.0),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8.0),
+                                ),
+                              ],
                             ),
                           ),
-                        ),
+                        ],
                       );
                     },
                   );

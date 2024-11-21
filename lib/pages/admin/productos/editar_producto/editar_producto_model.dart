@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 class EditarProductoModel extends FlutterFlowModel<EditarProductoWidget> {
   ///  State fields for stateful widgets in this page.
 
+  final formKey = GlobalKey<FormState>();
   // State field(s) for txtNombreProducto widget.
   FocusNode? txtNombreProductoFocusNode;
   TextEditingController? txtNombreProductoTextController;
@@ -32,6 +33,10 @@ class EditarProductoModel extends FlutterFlowModel<EditarProductoWidget> {
   FocusNode? txtPrecioFocusNode;
   TextEditingController? txtPrecioTextController;
   String? Function(BuildContext, String?)? txtPrecioTextControllerValidator;
+  bool isDataUploading = false;
+  FFUploadedFile uploadedLocalFile =
+      FFUploadedFile(bytes: Uint8List.fromList([]));
+  String uploadedFileUrl = '';
 
   @override
   void initState(BuildContext context) {}
