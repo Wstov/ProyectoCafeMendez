@@ -116,11 +116,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => const EditarProductoWidget(),
         ),
         FFRoute(
-          name: 'Prueba',
-          path: '/prueba',
-          builder: (context, params) => const PruebaWidget(),
-        ),
-        FFRoute(
           name: 'shoppingCart',
           path: '/shoppingCart',
           builder: (context, params) => const ShoppingCartWidget(),

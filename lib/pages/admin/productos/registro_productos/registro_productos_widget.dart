@@ -773,9 +773,7 @@ class _RegistroProductosWidgetState extends State<RegistroProductosWidget> {
                       padding:
                           const EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 0.0, 0.0),
                       child: FFButtonWidget(
-                        onPressed: () {
-                          print('Button pressed ...');
-                        },
+                        onPressed: () async {},
                         text: 'Guardar',
                         options: FFButtonOptions(
                           height: 40.0,

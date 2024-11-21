@@ -9,6 +9,5 @@ export '/pagina_productos/pagina_productos_widget.dart'
     show PaginaProductosWidget;
 export '/pages/admin/productos/editar_producto/editar_producto_widget.dart'
     show EditarProductoWidget;
-export '/pages/prueba/prueba_widget.dart' show PruebaWidget;
 export '/pages/cliente/carrito/shopping_cart/shopping_cart_widget.dart'
     show ShoppingCartWidget;
