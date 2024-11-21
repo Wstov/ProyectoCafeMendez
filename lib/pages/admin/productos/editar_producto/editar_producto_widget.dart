@@ -772,12 +772,12 @@ class _EditarProductoWidgetState extends State<EditarProductoWidget> {
                             alignment: const AlignmentDirectional(1.0, -1.0),
                             children: [
                               Align(
-                                alignment: const AlignmentDirectional(0.17, 0.01),
+                                alignment: const AlignmentDirectional(0.0, 0.0),
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(8.0),
                                   child: Image.network(
                                     widget.parametrosProducto!.imagen,
-                                    width: 220.0,
+                                    width: 234.0,
                                     height: 220.0,
                                     fit: BoxFit.cover,
                                   ),
@@ -852,7 +852,9 @@ class _EditarProductoWidgetState extends State<EditarProductoWidget> {
 
                                       await widget
                                           .parametrosProducto!.reference
-                                          .update(createProductosRecordData());
+                                          .update(createProductosRecordData(
+                                        imagen: _model.uploadedFileUrl,
+                                      ));
                                     },
                                     child: Icon(
                                       Icons.upload,
