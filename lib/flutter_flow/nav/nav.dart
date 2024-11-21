@@ -119,6 +119,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'shoppingCart',
           path: '/shoppingCart',
           builder: (context, params) => const ShoppingCartWidget(),
+        ),
+        FFRoute(
+          name: 'FAQS',
+          path: '/faqs',
+          builder: (context, params) => const FaqsWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

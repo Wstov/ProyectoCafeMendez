@@ -11,3 +11,4 @@ export '/pages/admin/productos/editar_producto/editar_producto_widget.dart'
     show EditarProductoWidget;
 export '/pages/cliente/carrito/shopping_cart/shopping_cart_widget.dart'
     show ShoppingCartWidget;
+export '/faqs/faqs_widget.dart' show FaqsWidget;

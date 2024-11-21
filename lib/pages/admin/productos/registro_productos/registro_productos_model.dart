@@ -32,6 +32,10 @@ class RegistroProductosModel extends FlutterFlowModel<RegistroProductosWidget> {
   FocusNode? txtPrecioFocusNode;
   TextEditingController? txtPrecioTextController;
   String? Function(BuildContext, String?)? txtPrecioTextControllerValidator;
+  bool isDataUploading = false;
+  FFUploadedFile uploadedLocalFile =
+      FFUploadedFile(bytes: Uint8List.fromList([]));
+  String uploadedFileUrl = '';
 
   @override
   void initState(BuildContext context) {}
