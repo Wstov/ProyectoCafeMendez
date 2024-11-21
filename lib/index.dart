@@ -12,3 +12,4 @@ export '/pages/admin/productos/editar_producto/editar_producto_widget.dart'
 export '/pages/cliente/carrito/shopping_cart/shopping_cart_widget.dart'
     show ShoppingCartWidget;
 export '/faqs/faqs_widget.dart' show FaqsWidget;
+export '/contact_us/contact_us_widget.dart' show ContactUsWidget;

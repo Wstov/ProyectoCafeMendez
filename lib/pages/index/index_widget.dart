@@ -545,39 +545,50 @@ class _IndexWidgetState extends State<IndexWidget> {
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
                                         children: [
-                                          Container(
-                                            width: 80.0,
-                                            height: 80.0,
-                                            decoration: const BoxDecoration(
-                                              gradient: LinearGradient(
-                                                colors: [
-                                                  Color(0xFF080808),
-                                                  Color(0xFF5A5C5C)
-                                                ],
-                                                stops: [0.0, 1.0],
-                                                begin: AlignmentDirectional(
-                                                    0.34, -1.0),
-                                                end: AlignmentDirectional(
-                                                    -0.34, 1.0),
+                                          InkWell(
+                                            splashColor: Colors.transparent,
+                                            focusColor: Colors.transparent,
+                                            hoverColor: Colors.transparent,
+                                            highlightColor: Colors.transparent,
+                                            onTap: () async {
+                                              context.pushNamed('ContactUs');
+                                            },
+                                            child: Container(
+                                              width: 80.0,
+                                              height: 80.0,
+                                              decoration: const BoxDecoration(
+                                                gradient: LinearGradient(
+                                                  colors: [
+                                                    Color(0xFF080808),
+                                                    Color(0xFF5A5C5C)
+                                                  ],
+                                                  stops: [0.0, 1.0],
+                                                  begin: AlignmentDirectional(
+                                                      0.34, -1.0),
+                                                  end: AlignmentDirectional(
+                                                      -0.34, 1.0),
+                                                ),
+                                                borderRadius: BorderRadius.only(
+                                                  bottomLeft:
+                                                      Radius.circular(10.0),
+                                                  bottomRight:
+                                                      Radius.circular(10.0),
+                                                  topLeft:
+                                                      Radius.circular(10.0),
+                                                  topRight:
+                                                      Radius.circular(10.0),
+                                                ),
                                               ),
-                                              borderRadius: BorderRadius.only(
-                                                bottomLeft:
-                                                    Radius.circular(10.0),
-                                                bottomRight:
-                                                    Radius.circular(10.0),
-                                                topLeft: Radius.circular(10.0),
-                                                topRight: Radius.circular(10.0),
-                                              ),
-                                            ),
-                                            child: Align(
-                                              alignment: const AlignmentDirectional(
-                                                  0.0, 0.0),
-                                              child: Icon(
-                                                Icons.phone_in_talk,
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .alternate,
-                                                size: 30.0,
+                                              child: Align(
+                                                alignment: const AlignmentDirectional(
+                                                    0.0, 0.0),
+                                                child: Icon(
+                                                  Icons.phone_in_talk,
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .alternate,
+                                                  size: 30.0,
+                                                ),
                                               ),
                                             ),
                                           ),
@@ -605,39 +616,50 @@ class _IndexWidgetState extends State<IndexWidget> {
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
                                         children: [
-                                          Container(
-                                            width: 80.0,
-                                            height: 80.0,
-                                            decoration: const BoxDecoration(
-                                              gradient: LinearGradient(
-                                                colors: [
-                                                  Color(0xFF080808),
-                                                  Color(0xFF5A5C5C)
-                                                ],
-                                                stops: [0.0, 1.0],
-                                                begin: AlignmentDirectional(
-                                                    0.34, -1.0),
-                                                end: AlignmentDirectional(
-                                                    -0.34, 1.0),
+                                          InkWell(
+                                            splashColor: Colors.transparent,
+                                            focusColor: Colors.transparent,
+                                            hoverColor: Colors.transparent,
+                                            highlightColor: Colors.transparent,
+                                            onTap: () async {
+                                              context.pushNamed('FAQS');
+                                            },
+                                            child: Container(
+                                              width: 80.0,
+                                              height: 80.0,
+                                              decoration: const BoxDecoration(
+                                                gradient: LinearGradient(
+                                                  colors: [
+                                                    Color(0xFF080808),
+                                                    Color(0xFF5A5C5C)
+                                                  ],
+                                                  stops: [0.0, 1.0],
+                                                  begin: AlignmentDirectional(
+                                                      0.34, -1.0),
+                                                  end: AlignmentDirectional(
+                                                      -0.34, 1.0),
+                                                ),
+                                                borderRadius: BorderRadius.only(
+                                                  bottomLeft:
+                                                      Radius.circular(10.0),
+                                                  bottomRight:
+                                                      Radius.circular(10.0),
+                                                  topLeft:
+                                                      Radius.circular(10.0),
+                                                  topRight:
+                                                      Radius.circular(10.0),
+                                                ),
                                               ),
-                                              borderRadius: BorderRadius.only(
-                                                bottomLeft:
-                                                    Radius.circular(10.0),
-                                                bottomRight:
-                                                    Radius.circular(10.0),
-                                                topLeft: Radius.circular(10.0),
-                                                topRight: Radius.circular(10.0),
-                                              ),
-                                            ),
-                                            child: Align(
-                                              alignment: const AlignmentDirectional(
-                                                  0.0, 0.0),
-                                              child: Icon(
-                                                Icons.question_mark,
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .alternate,
-                                                size: 30.0,
+                                              child: Align(
+                                                alignment: const AlignmentDirectional(
+                                                    0.0, 0.0),
+                                                child: Icon(
+                                                  Icons.question_mark,
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .alternate,
+                                                  size: 30.0,
+                                                ),
                                               ),
                                             ),
                                           ),
@@ -786,20 +808,29 @@ class _IndexWidgetState extends State<IndexWidget> {
                                   Padding(
                                     padding: const EdgeInsetsDirectional.fromSTEB(
                                         15.0, 20.0, 0.0, 0.0),
-                                    child: Container(
-                                      width: 180.0,
-                                      height: 196.0,
-                                      decoration: BoxDecoration(
-                                        color: FlutterFlowTheme.of(context)
-                                            .primaryText,
-                                        image: DecorationImage(
-                                          fit: BoxFit.cover,
-                                          image: Image.network(
-                                            'https://cdnimg.carepac.com/wp-content/uploads/2023/02/The-Bean-Coffee-Pouch-Bag-300x300.jpg',
-                                          ).image,
+                                    child: InkWell(
+                                      splashColor: Colors.transparent,
+                                      focusColor: Colors.transparent,
+                                      hoverColor: Colors.transparent,
+                                      highlightColor: Colors.transparent,
+                                      onTap: () async {
+                                        context.pushNamed('PaginaProductos');
+                                      },
+                                      child: Container(
+                                        width: 180.0,
+                                        height: 196.0,
+                                        decoration: BoxDecoration(
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryText,
+                                          image: DecorationImage(
+                                            fit: BoxFit.cover,
+                                            image: Image.network(
+                                              'https://cdnimg.carepac.com/wp-content/uploads/2023/02/The-Bean-Coffee-Pouch-Bag-300x300.jpg',
+                                            ).image,
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(16.0),
                                         ),
-                                        borderRadius:
-                                            BorderRadius.circular(16.0),
                                       ),
                                     ),
                                   ),
@@ -812,7 +843,7 @@ class _IndexWidgetState extends State<IndexWidget> {
                                           MainAxisAlignment.spaceEvenly,
                                       children: [
                                         Text(
-                                          '₡ 5500',
+                                          '₡ 11500',
                                           style: FlutterFlowTheme.of(context)
                                               .bodyMedium
                                               .override(
@@ -839,7 +870,7 @@ class _IndexWidgetState extends State<IndexWidget> {
                                     ),
                                   ),
                                   Text(
-                                    'Cafe Tipo Red Honey\n340g',
+                                    'Cafe Tipo Red Honey\n1000g',
                                     style: FlutterFlowTheme.of(context)
                                         .bodyMedium
                                         .override(
