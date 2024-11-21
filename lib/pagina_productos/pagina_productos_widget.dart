@@ -1,11 +1,9 @@
+import '/components/add_to_cart_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'pagina_productos_model.dart';
 export 'pagina_productos_model.dart';
 
@@ -42,7 +40,7 @@ class _PaginaProductosWidgetState extends State<PaginaProductosWidget> {
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         appBar: PreferredSize(
-          preferredSize: Size.fromHeight(80.0),
+          preferredSize: const Size.fromHeight(80.0),
           child: AppBar(
             backgroundColor: Colors.white,
             iconTheme:
@@ -69,7 +67,7 @@ class _PaginaProductosWidgetState extends State<PaginaProductosWidget> {
                 children: [
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 10.0, 0.0),
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 10.0, 0.0),
                     child: Icon(
                       Icons.shopping_cart,
                       color: FlutterFlowTheme.of(context).primaryText,
@@ -78,7 +76,7 @@ class _PaginaProductosWidgetState extends State<PaginaProductosWidget> {
                   ),
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
+                        const EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
                     child: Icon(
                       Icons.search,
                       color: FlutterFlowTheme.of(context).primaryText,
@@ -98,7 +96,8 @@ class _PaginaProductosWidgetState extends State<PaginaProductosWidget> {
           child: SingleChildScrollView(
             child: Column(
               mainAxisSize: MainAxisSize.max,
-              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Stack(
                   children: [
@@ -111,28 +110,31 @@ class _PaginaProductosWidgetState extends State<PaginaProductosWidget> {
                         fit: BoxFit.cover,
                       ),
                     ),
-                    Padding(
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 5.0, 0.0),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          FlutterFlowIconButton(
-                            borderColor: Colors.transparent,
-                            borderRadius: 8.0,
-                            buttonSize: 40.0,
-                            fillColor: Color(0x00EDEDF0),
-                            icon: Icon(
-                              Icons.favorite_border,
-                              color: Color(0xFFDF0B0B),
-                              size: 24.0,
+                    Align(
+                      alignment: const AlignmentDirectional(0.0, 0.0),
+                      child: Padding(
+                        padding:
+                            const EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 5.0, 0.0),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            FlutterFlowIconButton(
+                              borderColor: Colors.transparent,
+                              borderRadius: 8.0,
+                              buttonSize: 40.0,
+                              fillColor: const Color(0x00EDEDF0),
+                              icon: const Icon(
+                                Icons.favorite_border,
+                                color: Color(0xFFDF0B0B),
+                                size: 24.0,
+                              ),
+                              onPressed: () {
+                                print('IconButton pressed ...');
+                              },
                             ),
-                            onPressed: () {
-                              print('IconButton pressed ...');
-                            },
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                   ],
@@ -142,7 +144,7 @@ class _PaginaProductosWidgetState extends State<PaginaProductosWidget> {
                   children: [
                     Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(15.0, 15.0, 15.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(15.0, 15.0, 15.0, 0.0),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -171,7 +173,7 @@ class _PaginaProductosWidgetState extends State<PaginaProductosWidget> {
                     ),
                     Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(15.0, 5.0, 15.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(15.0, 5.0, 15.0, 0.0),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -192,7 +194,7 @@ class _PaginaProductosWidgetState extends State<PaginaProductosWidget> {
                     ),
                     Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(10.0, 5.0, 10.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(10.0, 5.0, 10.0, 0.0),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -200,7 +202,7 @@ class _PaginaProductosWidgetState extends State<PaginaProductosWidget> {
                           RatingBar.builder(
                             onRatingUpdate: (newValue) => safeSetState(
                                 () => _model.ratingBarValue = newValue),
-                            itemBuilder: (context, index) => Icon(
+                            itemBuilder: (context, index) => const Icon(
                               Icons.star_rounded,
                               color: Color(0xFFF1AB10),
                             ),
@@ -209,33 +211,48 @@ class _PaginaProductosWidgetState extends State<PaginaProductosWidget> {
                             unratedColor: FlutterFlowTheme.of(context).accent1,
                             itemCount: 5,
                             itemSize: 24.0,
-                            glowColor: Color(0xFFF1AB10),
+                            glowColor: const Color(0xFFF1AB10),
                           ),
                         ],
                       ),
                     ),
                   ],
                 ),
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(8.0, 10.0, 0.0, 0.0),
-                  child: Text(
-                    'Descripcion del Producto:',
-                    style: FlutterFlowTheme.of(context).bodyMedium.override(
-                          fontFamily: 'Inter',
-                          letterSpacing: 0.0,
-                        ),
-                  ),
+                Column(
+                  mainAxisSize: MainAxisSize.max,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding:
+                          const EdgeInsetsDirectional.fromSTEB(8.0, 10.0, 0.0, 0.0),
+                      child: Text(
+                        'Descripcion del Producto:',
+                        style: FlutterFlowTheme.of(context).bodyMedium.override(
+                              fontFamily: 'Inter',
+                              letterSpacing: 0.0,
+                            ),
+                      ),
+                    ),
+                    Padding(
+                      padding:
+                          const EdgeInsetsDirectional.fromSTEB(25.0, 10.0, 25.0, 0.0),
+                      child: Text(
+                        'El café honey es un tipo de café que se caracteriza por su dulzor, acidez equilibrada y notas afrutadas. Se obtiene mediante un proceso de secado que se sitúa entre el café natural y el café lavado.',
+                        style: FlutterFlowTheme.of(context).bodyMedium.override(
+                              fontFamily: 'Inter',
+                              letterSpacing: 0.0,
+                              fontWeight: FontWeight.w300,
+                            ),
+                      ),
+                    ),
+                  ],
                 ),
                 Padding(
-                  padding:
-                      EdgeInsetsDirectional.fromSTEB(25.0, 10.0, 25.0, 0.0),
-                  child: Text(
-                    'El café honey es un tipo de café que se caracteriza por su dulzor, acidez equilibrada y notas afrutadas. Se obtiene mediante un proceso de secado que se sitúa entre el café natural y el café lavado.',
-                    style: FlutterFlowTheme.of(context).bodyMedium.override(
-                          fontFamily: 'Inter',
-                          letterSpacing: 0.0,
-                          fontWeight: FontWeight.w300,
-                        ),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 125.0, 0.0, 0.0),
+                  child: wrapWithModel(
+                    model: _model.addToCartModel,
+                    updateCallback: () => safeSetState(() {}),
+                    child: const AddToCartWidget(),
                   ),
                 ),
               ],

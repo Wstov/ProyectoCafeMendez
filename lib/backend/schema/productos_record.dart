@@ -10,9 +10,9 @@ import '/flutter_flow/flutter_flow_util.dart';
 
 class ProductosRecord extends FirestoreRecord {
   ProductosRecord._(
-    DocumentReference reference,
-    Map<String, dynamic> data,
-  ) : super(reference, data) {
+    super.reference,
+    super.data,
+  ) {
     _initializeFields();
   }
 
@@ -56,6 +56,11 @@ class ProductosRecord extends FirestoreRecord {
   String get imagen => _imagen ?? '';
   bool hasImagen() => _imagen != null;
 
+  // "ratings" field.
+  List<int>? _ratings;
+  List<int> get ratings => _ratings ?? const [];
+  bool hasRatings() => _ratings != null;
+
   void _initializeFields() {
     _sku = snapshotData['sku'] as String?;
     _nombre = snapshotData['nombre'] as String?;
@@ -65,6 +70,7 @@ class ProductosRecord extends FirestoreRecord {
     _cantidad = castToType<int>(snapshotData['cantidad']);
     _precio = castToType<double>(snapshotData['precio']);
     _imagen = snapshotData['imagen'] as String?;
+    _ratings = getDataList(snapshotData['ratings']);
   }
 
   static CollectionReference get collection =>
@@ -132,6 +138,7 @@ class ProductosRecordDocumentEquality implements Equality<ProductosRecord> {
 
   @override
   bool equals(ProductosRecord? e1, ProductosRecord? e2) {
+    const listEquality = ListEquality();
     return e1?.sku == e2?.sku &&
         e1?.nombre == e2?.nombre &&
         e1?.detalle == e2?.detalle &&
@@ -139,7 +146,8 @@ class ProductosRecordDocumentEquality implements Equality<ProductosRecord> {
         e1?.tipoGrano == e2?.tipoGrano &&
         e1?.cantidad == e2?.cantidad &&
         e1?.precio == e2?.precio &&
-        e1?.imagen == e2?.imagen;
+        e1?.imagen == e2?.imagen &&
+        listEquality.equals(e1?.ratings, e2?.ratings);
   }
 
   @override
@@ -151,7 +159,8 @@ class ProductosRecordDocumentEquality implements Equality<ProductosRecord> {
         e?.tipoGrano,
         e?.cantidad,
         e?.precio,
-        e?.imagen
+        e?.imagen,
+        e?.ratings
       ]);
 
   @override

@@ -1,8 +1,8 @@
 import '/flutter_flow/flutter_flow_util.dart';
-import 'admin_home_widget.dart' show AdminHomeWidget;
+import 'leave_review_widget.dart' show LeaveReviewWidget;
 import 'package:flutter/material.dart';
 
-class AdminHomeModel extends FlutterFlowModel<AdminHomeWidget> {
+class LeaveReviewModel extends FlutterFlowModel<LeaveReviewWidget> {
   @override
   void initState(BuildContext context) {}
 

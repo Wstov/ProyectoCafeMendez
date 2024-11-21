@@ -1,8 +1,8 @@
 import '/flutter_flow/flutter_flow_util.dart';
-import 'admin_home_widget.dart' show AdminHomeWidget;
+import 'add_to_cart_widget.dart' show AddToCartWidget;
 import 'package:flutter/material.dart';
 
-class AdminHomeModel extends FlutterFlowModel<AdminHomeWidget> {
+class AddToCartModel extends FlutterFlowModel<AddToCartWidget> {
   @override
   void initState(BuildContext context) {}
 
