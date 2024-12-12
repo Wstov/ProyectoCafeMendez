@@ -146,6 +146,38 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'ContactUs',
           path: '/contactUs',
           builder: (context, params) => const ContactUsWidget(),
+        ),
+        FFRoute(
+          name: 'metodosExtraccion',
+          path: '/metodosExtraccion',
+          builder: (context, params) => const MetodosExtraccionWidget(),
+        ),
+        FFRoute(
+          name: 'confirmacionPago',
+          path: '/confirmacionPago',
+          builder: (context, params) => ConfirmacionPagoWidget(
+            compraref: params.getParam(
+              'compraref',
+              ParamType.DocumentReference,
+              isList: false,
+              collectionNamePath: ['productos'],
+            ),
+          ),
+        ),
+        FFRoute(
+          name: 'Recetas',
+          path: '/recetas',
+          builder: (context, params) => const RecetasWidget(),
+        ),
+        FFRoute(
+          name: 'Afogatto',
+          path: '/afogatto',
+          builder: (context, params) => const AfogattoWidget(),
+        ),
+        FFRoute(
+          name: 'PumpkinSpice',
+          path: '/pumpkinSpice',
+          builder: (context, params) => const PumpkinSpiceWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
