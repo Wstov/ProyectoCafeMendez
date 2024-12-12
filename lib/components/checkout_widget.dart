@@ -1,6 +1,8 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'checkout_model.dart';
 export 'checkout_model.dart';
 
@@ -35,6 +37,8 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Align(
       alignment: const AlignmentDirectional(0.0, 1.0),
       child: Container(
@@ -70,7 +74,15 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                     padding:
                         const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 20.0, 0.0),
                     child: Text(
-                      '₡11500',
+                      valueOrDefault<String>(
+                        formatNumber(
+                          functions
+                              .priceSummary(FFAppState().cartSummary.toList()),
+                          formatType: FormatType.decimal,
+                          currency: '₡ ',
+                        ),
+                        '0',
+                      ),
                       style: FlutterFlowTheme.of(context).bodyMedium.override(
                             fontFamily: 'Inter',
                             letterSpacing: 0.0,
@@ -141,7 +153,16 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                           padding: const EdgeInsetsDirectional.fromSTEB(
                               10.0, 0.0, 0.0, 0.0),
                           child: Text(
-                            '₡11500',
+                            valueOrDefault<String>(
+                              formatNumber(
+                                functions.priceSummary(
+                                    FFAppState().cartSummary.toList()),
+                                formatType: FormatType.decimal,
+                                decimalType: DecimalType.automatic,
+                                currency: '₡',
+                              ),
+                              '0',
+                            ),
                             style: FlutterFlowTheme.of(context)
                                 .bodyMedium
                                 .override(

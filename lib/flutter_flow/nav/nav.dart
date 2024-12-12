@@ -73,13 +73,13 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
       errorBuilder: (context, state) =>
-          appStateNotifier.loggedIn ? const HomePageWidget() : const AccesoWidget(),
+          appStateNotifier.loggedIn ? const ShoppingCartWidget() : const FaqsWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
           builder: (context, _) =>
-              appStateNotifier.loggedIn ? const HomePageWidget() : const AccesoWidget(),
+              appStateNotifier.loggedIn ? const ShoppingCartWidget() : const FaqsWidget(),
         ),
         FFRoute(
           name: 'HomePage',
@@ -109,7 +109,14 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'PaginaProductos',
           path: '/paginaProductos',
-          builder: (context, params) => const PaginaProductosWidget(),
+          builder: (context, params) => PaginaProductosWidget(
+            productRef: params.getParam(
+              'productRef',
+              ParamType.DocumentReference,
+              isList: false,
+              collectionNamePath: ['productos'],
+            ),
+          ),
         ),
         FFRoute(
           name: 'EditarProducto',
@@ -309,7 +316,7 @@ class FFRoute {
 
           if (requireAuth && !appStateNotifier.loggedIn) {
             appStateNotifier.setRedirectLocationIfUnset(state.uri.toString());
-            return '/acceso';
+            return '/faqs';
           }
           return null;
         },

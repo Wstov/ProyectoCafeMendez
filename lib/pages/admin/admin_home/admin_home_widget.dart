@@ -35,7 +35,10 @@ class _AdminHomeWidgetState extends State<AdminHomeWidget> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => FocusScope.of(context).unfocus(),
+      onTap: () {
+        FocusScope.of(context).unfocus();
+        FocusManager.instance.primaryFocus?.unfocus();
+      },
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -204,7 +207,7 @@ class _AdminHomeWidgetState extends State<AdminHomeWidget> {
                       await authManager.signOut();
                       GoRouter.of(context).clearRedirectLocation();
 
-                      context.goNamedAuth('Acceso', context.mounted);
+                      context.goNamedAuth('FAQS', context.mounted);
                     },
                     child: Row(
                       mainAxisSize: MainAxisSize.max,

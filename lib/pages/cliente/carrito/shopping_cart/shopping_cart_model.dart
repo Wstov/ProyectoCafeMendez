@@ -6,8 +6,6 @@ import 'package:flutter/material.dart';
 class ShoppingCartModel extends FlutterFlowModel<ShoppingCartWidget> {
   ///  State fields for stateful widgets in this page.
 
-  // State field(s) for CountController widget.
-  int? countControllerValue;
   // Model for checkout component.
   late CheckoutModel checkoutModel;
 

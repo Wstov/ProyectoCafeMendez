@@ -1,9 +1,10 @@
+import '/backend/backend.dart';
 import '/components/checkout_widget.dart';
-import '/flutter_flow/flutter_flow_count_controller.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'shopping_cart_model.dart';
 export 'shopping_cart_model.dart';
 
@@ -34,8 +35,13 @@ class _ShoppingCartWidgetState extends State<ShoppingCartWidget> {
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return GestureDetector(
-      onTap: () => FocusScope.of(context).unfocus(),
+      onTap: () {
+        FocusScope.of(context).unfocus();
+        FocusManager.instance.primaryFocus?.unfocus();
+      },
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -124,167 +130,175 @@ class _ShoppingCartWidgetState extends State<ShoppingCartWidget> {
                           ],
                         ),
                       ),
-                      ListView(
-                        padding: EdgeInsets.zero,
-                        shrinkWrap: true,
-                        scrollDirection: Axis.vertical,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
-                                20.0, 20.0, 20.0, 20.0),
-                            child: Container(
-                              width: 100.0,
-                              height: 150.0,
-                              decoration: BoxDecoration(
-                                color: FlutterFlowTheme.of(context)
-                                    .secondaryBackground,
-                                borderRadius: BorderRadius.circular(16.0),
-                              ),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  ClipRRect(
-                                    borderRadius: BorderRadius.circular(8.0),
-                                    child: Image.network(
-                                      'https://images.vexels.com/media/users/3/193473/raw/b9db46da0bcef4d45ddaccef807f7e2b-maqueta-de-empaque-de-bolsa-de-cafe.jpg',
-                                      width: 150.0,
-                                      height: 150.0,
-                                      fit: BoxFit.cover,
-                                    ),
+                      Builder(
+                        builder: (context) {
+                          final cartProducts =
+                              FFAppState().cartProducts.toList();
+
+                          return ListView.builder(
+                            padding: EdgeInsets.zero,
+                            shrinkWrap: true,
+                            scrollDirection: Axis.vertical,
+                            itemCount: cartProducts.length,
+                            itemBuilder: (context, cartProductsIndex) {
+                              final cartProductsItem =
+                                  cartProducts[cartProductsIndex];
+                              return Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    20.0, 20.0, 20.0, 20.0),
+                                child: Container(
+                                  width: 100.0,
+                                  height: 150.0,
+                                  decoration: BoxDecoration(
+                                    color: FlutterFlowTheme.of(context)
+                                        .secondaryBackground,
+                                    borderRadius: BorderRadius.circular(16.0),
                                   ),
-                                  Column(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
-                                    children: [
-                                      Row(
+                                  child: FutureBuilder<ProductosRecord>(
+                                    future: ProductosRecord.getDocumentOnce(
+                                        cartProductsItem),
+                                    builder: (context, snapshot) {
+                                      // Customize what your widget looks like when it's loading.
+                                      if (!snapshot.hasData) {
+                                        return Center(
+                                          child: SizedBox(
+                                            width: 50.0,
+                                            height: 50.0,
+                                            child: CircularProgressIndicator(
+                                              valueColor:
+                                                  AlwaysStoppedAnimation<Color>(
+                                                FlutterFlowTheme.of(context)
+                                                    .primary,
+                                              ),
+                                            ),
+                                          ),
+                                        );
+                                      }
+
+                                      final rowProductosRecord = snapshot.data!;
+
+                                      return Row(
                                         mainAxisSize: MainAxisSize.max,
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
                                         children: [
-                                          Padding(
-                                            padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
-                                                    10.0, 0.0, 0.0, 0.0),
-                                            child: Text(
-                                              'Café Honey',
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        fontFamily: 'Inter',
-                                                        fontSize: 18.0,
-                                                        letterSpacing: 0.0,
+                                          ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(8.0),
+                                            child: Image.network(
+                                              rowProductosRecord.imagen,
+                                              width: 150.0,
+                                              height: 150.0,
+                                              fit: BoxFit.cover,
+                                            ),
+                                          ),
+                                          Column(
+                                            mainAxisSize: MainAxisSize.max,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceEvenly,
+                                            children: [
+                                              Row(
+                                                mainAxisSize: MainAxisSize.max,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsetsDirectional
+                                                            .fromSTEB(10.0, 0.0,
+                                                                0.0, 0.0),
+                                                    child: Text(
+                                                      rowProductosRecord.nombre,
+                                                      style: FlutterFlowTheme
+                                                              .of(context)
+                                                          .bodyMedium
+                                                          .override(
+                                                            fontFamily: 'Inter',
+                                                            fontSize: 18.0,
+                                                            letterSpacing: 0.0,
+                                                          ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                              Text(
+                                                rowProductosRecord.presentacion,
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily: 'Inter',
+                                                          letterSpacing: 0.0,
+                                                        ),
+                                              ),
+                                              Align(
+                                                alignment: const AlignmentDirectional(
+                                                    0.0, 0.0),
+                                                child: Padding(
+                                                  padding: const EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          0.0, 0.0, 30.0, 0.0),
+                                                  child: Text(
+                                                    valueOrDefault<String>(
+                                                      formatNumber(
+                                                        rowProductosRecord
+                                                            .salePrice,
+                                                        formatType:
+                                                            FormatType.decimal,
+                                                        decimalType: DecimalType
+                                                            .automatic,
                                                       ),
+                                                      '0',
+                                                    ),
+                                                    textAlign: TextAlign.start,
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily: 'Inter',
+                                                          letterSpacing: 0.0,
+                                                          fontWeight:
+                                                              FontWeight.w800,
+                                                        ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          Align(
+                                            alignment:
+                                                const AlignmentDirectional(1.0, -1.0),
+                                            child: FlutterFlowIconButton(
+                                              borderRadius: 8.0,
+                                              buttonSize: 40.0,
+                                              icon: const Icon(
+                                                Icons.delete_forever,
+                                                color: Color(0xFFCF0404),
+                                                size: 24.0,
+                                              ),
+                                              onPressed: () async {
+                                                FFAppState()
+                                                    .removeFromCartProducts(
+                                                        rowProductosRecord
+                                                            .reference);
+                                                FFAppState()
+                                                    .removeFromCartSummary(
+                                                        rowProductosRecord
+                                                            .salePrice);
+                                                safeSetState(() {});
+                                              },
                                             ),
                                           ),
                                         ],
-                                      ),
-                                      Text(
-                                        '1000 gramos',
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .override(
-                                              fontFamily: 'Inter',
-                                              letterSpacing: 0.0,
-                                            ),
-                                      ),
-                                      Align(
-                                        alignment:
-                                            const AlignmentDirectional(0.0, 0.0),
-                                        child: Padding(
-                                          padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 0.0, 30.0, 0.0),
-                                          child: Text(
-                                            '₡11500',
-                                            textAlign: TextAlign.start,
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyMedium
-                                                .override(
-                                                  fontFamily: 'Inter',
-                                                  letterSpacing: 0.0,
-                                                  fontWeight: FontWeight.w800,
-                                                ),
-                                          ),
-                                        ),
-                                      ),
-                                      Container(
-                                        width: 80.0,
-                                        height: 22.0,
-                                        decoration: BoxDecoration(
-                                          color: FlutterFlowTheme.of(context)
-                                              .primaryText,
-                                          borderRadius:
-                                              BorderRadius.circular(8.0),
-                                          shape: BoxShape.rectangle,
-                                        ),
-                                        child: FlutterFlowCountController(
-                                          decrementIconBuilder: (enabled) =>
-                                              Icon(
-                                            Icons.remove_rounded,
-                                            color: enabled
-                                                ? FlutterFlowTheme.of(context)
-                                                    .primaryBackground
-                                                : FlutterFlowTheme.of(context)
-                                                    .alternate,
-                                            size: 24.0,
-                                          ),
-                                          incrementIconBuilder: (enabled) =>
-                                              Icon(
-                                            Icons.add_rounded,
-                                            color: enabled
-                                                ? FlutterFlowTheme.of(context)
-                                                    .alternate
-                                                : FlutterFlowTheme.of(context)
-                                                    .alternate,
-                                            size: 24.0,
-                                          ),
-                                          countBuilder: (count) => Text(
-                                            count.toString(),
-                                            style: FlutterFlowTheme.of(context)
-                                                .titleLarge
-                                                .override(
-                                                  fontFamily: 'Inter Tight',
-                                                  letterSpacing: 0.0,
-                                                ),
-                                          ),
-                                          count: _model.countControllerValue ??=
-                                              0,
-                                          updateCount: (count) => safeSetState(
-                                              () =>
-                                                  _model.countControllerValue =
-                                                      count),
-                                          stepSize: 1,
-                                          contentPadding:
-                                              const EdgeInsetsDirectional.fromSTEB(
-                                                  12.0, 0.0, 12.0, 0.0),
-                                        ),
-                                      ),
-                                    ],
+                                      );
+                                    },
                                   ),
-                                  Align(
-                                    alignment: const AlignmentDirectional(1.0, -1.0),
-                                    child: FlutterFlowIconButton(
-                                      borderRadius: 8.0,
-                                      buttonSize: 40.0,
-                                      icon: const Icon(
-                                        Icons.delete_forever,
-                                        color: Color(0xFFCF0404),
-                                        size: 24.0,
-                                      ),
-                                      onPressed: () {
-                                        print('IconButton pressed ...');
-                                      },
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ],
+                                ),
+                              );
+                            },
+                          );
+                        },
                       ),
                       Align(
                         alignment: const AlignmentDirectional(0.0, 0.0),
