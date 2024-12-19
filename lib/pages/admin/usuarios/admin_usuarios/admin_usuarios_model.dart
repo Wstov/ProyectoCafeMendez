@@ -1,8 +1,8 @@
 import '/flutter_flow/flutter_flow_util.dart';
-import 'shopping_cart_widget.dart' show ShoppingCartWidget;
+import 'admin_usuarios_widget.dart' show AdminUsuariosWidget;
 import 'package:flutter/material.dart';
 
-class ShoppingCartModel extends FlutterFlowModel<ShoppingCartWidget> {
+class AdminUsuariosModel extends FlutterFlowModel<AdminUsuariosWidget> {
   @override
   void initState(BuildContext context) {}
 

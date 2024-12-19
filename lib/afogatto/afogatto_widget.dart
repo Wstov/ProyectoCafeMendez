@@ -1,4 +1,3 @@
-import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
@@ -50,13 +49,22 @@ class _AfogattoWidgetState extends State<AfogattoWidget> {
             title: Column(
               mainAxisSize: MainAxisSize.max,
               children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(8.0),
-                  child: Image.asset(
-                    'assets/images/logo-removebg-preview_(3).png',
-                    width: 114.0,
-                    height: 66.0,
-                    fit: BoxFit.contain,
+                InkWell(
+                  splashColor: Colors.transparent,
+                  focusColor: Colors.transparent,
+                  hoverColor: Colors.transparent,
+                  highlightColor: Colors.transparent,
+                  onTap: () async {
+                    context.pushNamed('Index');
+                  },
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(8.0),
+                    child: Image.asset(
+                      'assets/images/logo-removebg-preview_(3).png',
+                      width: 114.0,
+                      height: 66.0,
+                      fit: BoxFit.contain,
+                    ),
                   ),
                 ),
               ],
@@ -69,10 +77,19 @@ class _AfogattoWidgetState extends State<AfogattoWidget> {
                   Padding(
                     padding:
                         const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 10.0, 0.0),
-                    child: Icon(
-                      Icons.shopping_cart,
-                      color: FlutterFlowTheme.of(context).primaryText,
-                      size: 24.0,
+                    child: InkWell(
+                      splashColor: Colors.transparent,
+                      focusColor: Colors.transparent,
+                      hoverColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
+                      onTap: () async {
+                        context.pushNamed('shoppingCart');
+                      },
+                      child: Icon(
+                        Icons.shopping_cart,
+                        color: FlutterFlowTheme.of(context).primaryText,
+                        size: 24.0,
+                      ),
                     ),
                   ),
                   Padding(
@@ -108,28 +125,6 @@ class _AfogattoWidgetState extends State<AfogattoWidget> {
                             width: double.infinity,
                             height: 233.0,
                             fit: BoxFit.contain,
-                          ),
-                          Align(
-                            alignment: const AlignmentDirectional(0.85, -0.4),
-                            child: Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 50.0, 0.0, 0.0),
-                              child: FlutterFlowIconButton(
-                                borderColor: Colors.transparent,
-                                borderRadius: 30.0,
-                                borderWidth: 1.0,
-                                buttonSize: 40.0,
-                                fillColor: const Color(0x7F0F1113),
-                                icon: const Icon(
-                                  Icons.close_rounded,
-                                  color: Colors.white,
-                                  size: 20.0,
-                                ),
-                                onPressed: () async {
-                                  context.pop();
-                                },
-                              ),
-                            ),
                           ),
                         ],
                       ),

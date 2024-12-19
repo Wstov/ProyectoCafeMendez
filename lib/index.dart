@@ -1,12 +1,10 @@
 // Export pages
 export '/pages/home_page/home_page_widget.dart' show HomePageWidget;
-export '/pages/acceso/acceso_widget.dart' show AccesoWidget;
+export '/pages/login/acceso/acceso_widget.dart' show AccesoWidget;
 export '/pages/admin/productos/registro_productos/registro_productos_widget.dart'
     show RegistroProductosWidget;
 export '/pages/admin/admin_home/admin_home_widget.dart' show AdminHomeWidget;
 export '/pages/index/index_widget.dart' show IndexWidget;
-export '/pagina_productos/pagina_productos_widget.dart'
-    show PaginaProductosWidget;
 export '/pages/admin/productos/editar_producto/editar_producto_widget.dart'
     show EditarProductoWidget;
 export '/pages/cliente/carrito/shopping_cart/shopping_cart_widget.dart'
@@ -20,3 +18,12 @@ export '/confirmacion_pago/confirmacion_pago_widget.dart'
 export '/recetas/recetas_widget.dart' show RecetasWidget;
 export '/afogatto/afogatto_widget.dart' show AfogattoWidget;
 export '/pumpkin_spice/pumpkin_spice_widget.dart' show PumpkinSpiceWidget;
+export '/pages/admin/usuarios/admin_usuarios/admin_usuarios_widget.dart'
+    show AdminUsuariosWidget;
+export '/pages/admin/usuarios/editar_usuario/editar_usuario_widget.dart'
+    show EditarUsuarioWidget;
+export '/all_products/all_products_widget.dart' show AllProductsWidget;
+export '/pagina_productos/pagina_productos_widget.dart'
+    show PaginaProductosWidget;
+export '/pago/pago_widget.dart' show PagoWidget;
+export '/about_u_s/about_u_s_widget.dart' show AboutUSWidget;

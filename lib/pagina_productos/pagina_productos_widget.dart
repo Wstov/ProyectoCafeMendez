@@ -1,23 +1,22 @@
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
-import '/components/add_to_cart_widget.dart';
-import '/components/leave_review_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'pagina_productos_model.dart';
 export 'pagina_productos_model.dart';
 
 class PaginaProductosWidget extends StatefulWidget {
   const PaginaProductosWidget({
     super.key,
-    this.productRef,
+    required this.datosProducto,
   });
 
-  final DocumentReference? productRef;
+  final ProductosRecord? datosProducto;
 
   @override
   State<PaginaProductosWidget> createState() => _PaginaProductosWidgetState();
@@ -43,8 +42,10 @@ class _PaginaProductosWidgetState extends State<PaginaProductosWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<ProductosRecord>(
-      stream: ProductosRecord.getDocument(widget.productRef!),
+    return StreamBuilder<List<ProductosRecord>>(
+      stream: queryProductosRecord(
+        singleRecord: true,
+      ),
       builder: (context, snapshot) {
         // Customize what your widget looks like when it's loading.
         if (!snapshot.hasData) {
@@ -63,8 +64,16 @@ class _PaginaProductosWidgetState extends State<PaginaProductosWidget> {
             ),
           );
         }
-
-        final paginaProductosProductosRecord = snapshot.data!;
+        List<ProductosRecord> paginaProductosProductosRecordList =
+            snapshot.data!;
+        // Return an empty Container when the item does not exist.
+        if (snapshot.data!.isEmpty) {
+          return Container();
+        }
+        final paginaProductosProductosRecord =
+            paginaProductosProductosRecordList.isNotEmpty
+                ? paginaProductosProductosRecordList.first
+                : null;
 
         return GestureDetector(
           onTap: () {
@@ -84,13 +93,22 @@ class _PaginaProductosWidgetState extends State<PaginaProductosWidget> {
                 title: Column(
                   mainAxisSize: MainAxisSize.max,
                   children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(8.0),
-                      child: Image.asset(
-                        'assets/images/logo-removebg-preview_(3).png',
-                        width: 114.0,
-                        height: 66.0,
-                        fit: BoxFit.contain,
+                    InkWell(
+                      splashColor: Colors.transparent,
+                      focusColor: Colors.transparent,
+                      hoverColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
+                      onTap: () async {
+                        context.pushNamed('Index');
+                      },
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(8.0),
+                        child: Image.asset(
+                          'assets/images/logo-removebg-preview_(3).png',
+                          width: 114.0,
+                          height: 66.0,
+                          fit: BoxFit.contain,
+                        ),
                       ),
                     ),
                   ],
@@ -103,10 +121,19 @@ class _PaginaProductosWidgetState extends State<PaginaProductosWidget> {
                       Padding(
                         padding:
                             const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 10.0, 0.0),
-                        child: Icon(
-                          Icons.shopping_cart,
-                          color: FlutterFlowTheme.of(context).primaryText,
-                          size: 24.0,
+                        child: InkWell(
+                          splashColor: Colors.transparent,
+                          focusColor: Colors.transparent,
+                          hoverColor: Colors.transparent,
+                          highlightColor: Colors.transparent,
+                          onTap: () async {
+                            context.pushNamed('shoppingCart');
+                          },
+                          child: Icon(
+                            Icons.shopping_cart,
+                            color: FlutterFlowTheme.of(context).primaryText,
+                            size: 24.0,
+                          ),
                         ),
                       ),
                       Padding(
@@ -139,7 +166,7 @@ class _PaginaProductosWidgetState extends State<PaginaProductosWidget> {
                         ClipRRect(
                           borderRadius: BorderRadius.circular(8.0),
                           child: Image.network(
-                            'https://images.vexels.com/media/users/3/193473/raw/b9db46da0bcef4d45ddaccef807f7e2b-maqueta-de-empaque-de-bolsa-de-cafe.jpg',
+                            widget.iamgen!,
                             width: 392.0,
                             height: 272.0,
                             fit: BoxFit.cover,
@@ -179,27 +206,21 @@ class _PaginaProductosWidgetState extends State<PaginaProductosWidget> {
                       children: [
                         Padding(
                           padding: const EdgeInsetsDirectional.fromSTEB(
-                              15.0, 15.0, 15.0, 0.0),
+                              10.0, 0.0, 0.0, 0.0),
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                paginaProductosProductosRecord.nombre,
-                                style: FlutterFlowTheme.of(context)
-                                    .headlineLarge
-                                    .override(
-                                      fontFamily: 'Inter Tight',
-                                      letterSpacing: 0.0,
-                                    ),
-                              ),
-                              Text(
-                                '₡11500.00',
+                                valueOrDefault<String>(
+                                  widget.datosProducto?.sku,
+                                  'codigo',
+                                ),
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(
                                       fontFamily: 'Inter',
-                                      fontSize: 18.0,
+                                      color: const Color(0x9A14181B),
+                                      fontSize: 11.0,
                                       letterSpacing: 0.0,
                                     ),
                               ),
@@ -208,21 +229,96 @@ class _PaginaProductosWidgetState extends State<PaginaProductosWidget> {
                         ),
                         Padding(
                           padding: const EdgeInsetsDirectional.fromSTEB(
-                              15.0, 5.0, 15.0, 0.0),
+                              15.0, 0.0, 15.0, 0.0),
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(
-                                'Bolsa 1000g',
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyMedium
-                                    .override(
-                                      fontFamily: 'Inter',
-                                      fontSize: 14.0,
-                                      letterSpacing: 0.0,
-                                      fontWeight: FontWeight.normal,
+                              Expanded(
+                                child: Text(
+                                  valueOrDefault<String>(
+                                    widget.datosProducto?.nombre,
+                                    'nombre producto',
+                                  ),
+                                  style: FlutterFlowTheme.of(context)
+                                      .headlineLarge
+                                      .override(
+                                        fontFamily: 'Inter Tight',
+                                        letterSpacing: 0.0,
+                                      ),
+                                ),
+                              ),
+                              RichText(
+                                textScaler: MediaQuery.of(context).textScaler,
+                                text: TextSpan(
+                                  children: [
+                                    TextSpan(
+                                      text: '₡ ',
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .override(
+                                            fontFamily: 'Inter',
+                                            fontSize: 18.0,
+                                            letterSpacing: 0.0,
+                                          ),
                                     ),
+                                    TextSpan(
+                                      text: widget.datosProducto!.precio
+                                          .toString(),
+                                      style: const TextStyle(),
+                                    )
+                                  ],
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        fontFamily: 'Inter',
+                                        fontSize: 18.0,
+                                        letterSpacing: 0.0,
+                                      ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
+                              15.0, 1.0, 15.0, 0.0),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              RichText(
+                                textScaler: MediaQuery.of(context).textScaler,
+                                text: TextSpan(
+                                  children: [
+                                    TextSpan(
+                                      text: 'Tipo de Grano: ',
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .override(
+                                            fontFamily: 'Inter',
+                                            fontSize: 14.0,
+                                            letterSpacing: 0.0,
+                                            fontWeight: FontWeight.normal,
+                                          ),
+                                    ),
+                                    TextSpan(
+                                      text: valueOrDefault<String>(
+                                        widget.datosProducto?.tipoGrano,
+                                        'tipo de grano',
+                                      ),
+                                      style: const TextStyle(),
+                                    )
+                                  ],
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        fontFamily: 'Inter',
+                                        fontSize: 14.0,
+                                        letterSpacing: 0.0,
+                                        fontWeight: FontWeight.normal,
+                                      ),
+                                ),
                               ),
                             ],
                           ),
@@ -246,7 +342,8 @@ class _PaginaProductosWidgetState extends State<PaginaProductosWidget> {
                                     valueOrDefault<double>(
                                   functions
                                       .averageRating(
-                                          paginaProductosProductosRecord.ratings
+                                          paginaProductosProductosRecord
+                                              ?.ratings
                                               .toList())
                                       ?.toDouble(),
                                   4.0,
@@ -257,45 +354,75 @@ class _PaginaProductosWidgetState extends State<PaginaProductosWidget> {
                                 itemSize: 24.0,
                                 glowColor: const Color(0xFFF1AB10),
                               ),
-                            ],
-                          ),
-                        ),
-                        Row(
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
-                                  25.0, 5.0, 0.0, 5.0),
-                              child: RichText(
+                              RichText(
                                 textScaler: MediaQuery.of(context).textScaler,
                                 text: TextSpan(
                                   children: [
                                     TextSpan(
-                                      text: formatNumber(
-                                        functions.averageRating(
-                                            paginaProductosProductosRecord
-                                                .ratings
-                                                .toList()),
-                                        formatType: FormatType.decimal,
-                                        decimalType: DecimalType.periodDecimal,
-                                      ),
+                                      text: ' 4.2 ',
                                       style: FlutterFlowTheme.of(context)
-                                          .bodyMedium
+                                          .titleLarge
                                           .override(
-                                            fontFamily: 'Inter',
-                                            fontSize: 24.0,
+                                            fontFamily: 'Inter Tight',
                                             letterSpacing: 0.0,
-                                            fontWeight: FontWeight.w600,
                                           ),
                                     ),
                                     TextSpan(
-                                      text: ' out of 5',
+                                      text: 'out of ',
                                       style: FlutterFlowTheme.of(context)
                                           .bodyMedium
                                           .override(
                                             fontFamily: 'Inter',
                                             letterSpacing: 0.0,
-                                            fontWeight: FontWeight.normal,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                    ),
+                                    TextSpan(
+                                      text: ' 5',
+                                      style: FlutterFlowTheme.of(context)
+                                          .titleMedium
+                                          .override(
+                                            fontFamily: 'Inter Tight',
+                                            letterSpacing: 0.0,
+                                          ),
+                                    ),
+                                    TextSpan(
+                                      text: '',
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .override(
+                                            fontFamily: 'Inter',
+                                            letterSpacing: 0.0,
+                                            fontStyle: FontStyle.italic,
+                                          ),
+                                    ),
+                                    TextSpan(
+                                      text: '',
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .override(
+                                            fontFamily: 'Inter',
+                                            letterSpacing: 0.0,
+                                          ),
+                                    ),
+                                    TextSpan(
+                                      text: '',
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .override(
+                                            fontFamily: 'Inter',
+                                            letterSpacing: 0.0,
+                                            decoration:
+                                                TextDecoration.underline,
+                                          ),
+                                    ),
+                                    TextSpan(
+                                      text: '',
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .override(
+                                            fontFamily: 'Inter',
+                                            letterSpacing: 0.0,
                                           ),
                                     )
                                   ],
@@ -307,8 +434,8 @@ class _PaginaProductosWidgetState extends State<PaginaProductosWidget> {
                                       ),
                                 ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ],
                     ),
@@ -323,7 +450,7 @@ class _PaginaProductosWidgetState extends State<PaginaProductosWidget> {
                               padding: const EdgeInsetsDirectional.fromSTEB(
                                   8.0, 10.0, 0.0, 0.0),
                               child: Text(
-                                'Descripcion del Producto:',
+                                'Presentación:',
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(
@@ -336,7 +463,10 @@ class _PaginaProductosWidgetState extends State<PaginaProductosWidget> {
                               padding: const EdgeInsetsDirectional.fromSTEB(
                                   25.0, 10.0, 25.0, 0.0),
                               child: Text(
-                                paginaProductosProductosRecord.detalle,
+                                valueOrDefault<String>(
+                                  widget.datosProducto?.presentacion,
+                                  'presentacion',
+                                ),
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(
@@ -350,264 +480,184 @@ class _PaginaProductosWidgetState extends State<PaginaProductosWidget> {
                         ),
                       ],
                     ),
-                    Column(
+                    Row(
                       mainAxisSize: MainAxisSize.max,
                       children: [
-                        Row(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 25.0, 0.0, 20.0),
-                              child: Text(
-                                'Opiniones de Nuestros Clientes:',
-                                textAlign: TextAlign.start,
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyMedium
-                                    .override(
-                                      fontFamily: 'Inter',
-                                      letterSpacing: 0.0,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
-                              10.0, 0.0, 0.0, 20.0),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 0.0, 8.0, 0.0),
-                                child: Text(
-                                  'Escribir un Review',
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyMedium
-                                      .override(
-                                        fontFamily: 'Inter',
-                                        letterSpacing: 0.0,
-                                      ),
-                                ),
-                              ),
-                              Builder(
-                                builder: (context) => Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 0.0, 10.0, 0.0),
-                                  child: FlutterFlowIconButton(
-                                    borderColor: const Color(0xFF121A20),
-                                    borderRadius: 8.0,
-                                    buttonSize: 40.0,
-                                    icon: Icon(
-                                      Icons.textsms_rounded,
-                                      color: FlutterFlowTheme.of(context)
-                                          .primaryText,
-                                      size: 24.0,
-                                    ),
-                                    onPressed: () async {
-                                      await showDialog(
-                                        context: context,
-                                        builder: (dialogContext) {
-                                          return Dialog(
-                                            elevation: 0,
-                                            insetPadding: EdgeInsets.zero,
-                                            backgroundColor: Colors.transparent,
-                                            alignment: const AlignmentDirectional(
-                                                    0.0, 0.0)
-                                                .resolve(
-                                                    Directionality.of(context)),
-                                            child: GestureDetector(
-                                              onTap: () {
-                                                FocusScope.of(dialogContext)
-                                                    .unfocus();
-                                                FocusManager
-                                                    .instance.primaryFocus
-                                                    ?.unfocus();
-                                              },
-                                              child: LeaveReviewWidget(
-                                                product: widget.productRef!,
-                                              ),
-                                            ),
-                                          );
-                                        },
-                                      );
-                                    },
-                                  ),
-                                ),
-                              ),
-                            ],
+                        Expanded(
+                          child: Container(
+                            width: MediaQuery.sizeOf(context).width * 1.0,
+                            height: 157.0,
+                            decoration: const BoxDecoration(),
                           ),
                         ),
                       ],
                     ),
-                    PagedListView<DocumentSnapshot<Object?>?, ReviewsRecord>(
-                      pagingController: _model.setListViewController(
-                          ReviewsRecord.collection(widget.productRef)
-                              .orderBy('date', descending: true),
-                          parent: widget.productRef),
-                      padding: EdgeInsets.zero,
-                      shrinkWrap: true,
-                      reverse: false,
-                      scrollDirection: Axis.vertical,
-                      builderDelegate: PagedChildBuilderDelegate<ReviewsRecord>(
-                        // Customize what your widget looks like when it's loading the first page.
-                        firstPageProgressIndicatorBuilder: (_) => Center(
-                          child: SizedBox(
-                            width: 50.0,
-                            height: 50.0,
-                            child: CircularProgressIndicator(
-                              valueColor: AlwaysStoppedAnimation<Color>(
-                                FlutterFlowTheme.of(context).primary,
-                              ),
-                            ),
-                          ),
-                        ),
-                        // Customize what your widget looks like when it's loading another page.
-                        newPageProgressIndicatorBuilder: (_) => Center(
-                          child: SizedBox(
-                            width: 50.0,
-                            height: 50.0,
-                            child: CircularProgressIndicator(
-                              valueColor: AlwaysStoppedAnimation<Color>(
-                                FlutterFlowTheme.of(context).primary,
-                              ),
-                            ),
-                          ),
-                        ),
-
-                        itemBuilder: (context, _, listViewIndex) {
-                          final listViewReviewsRecord = _model
-                              .listViewPagingController!
-                              .itemList![listViewIndex];
-                          return StreamBuilder<UsersRecord>(
-                            stream: UsersRecord.getDocument(
-                                listViewReviewsRecord.name!),
-                            builder: (context, snapshot) {
-                              // Customize what your widget looks like when it's loading.
-                              if (!snapshot.hasData) {
-                                return Center(
-                                  child: SizedBox(
-                                    width: 50.0,
-                                    height: 50.0,
-                                    child: CircularProgressIndicator(
-                                      valueColor: AlwaysStoppedAnimation<Color>(
-                                        FlutterFlowTheme.of(context).primary,
+                    Padding(
+                      padding:
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 15.0, 0.0),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Align(
+                                alignment: const AlignmentDirectional(0.0, 1.0),
+                                child: Padding(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                      20.0, 0.0, 0.0, 0.0),
+                                  child: Container(
+                                    width:
+                                        MediaQuery.sizeOf(context).width * 0.9,
+                                    height: 80.0,
+                                    decoration: BoxDecoration(
+                                      color: FlutterFlowTheme.of(context)
+                                          .secondaryBackground,
+                                      borderRadius: const BorderRadius.only(
+                                        bottomLeft: Radius.circular(15.0),
+                                        bottomRight: Radius.circular(15.0),
+                                        topLeft: Radius.circular(15.0),
+                                        topRight: Radius.circular(15.0),
                                       ),
                                     ),
-                                  ),
-                                );
-                              }
-
-                              final columnUsersRecord = snapshot.data!;
-
-                              return Column(
-                                mainAxisSize: MainAxisSize.max,
-                                children: [
-                                  Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      Row(
+                                    alignment: const AlignmentDirectional(0.0, 1.0),
+                                    child: Padding(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                          25.0, 0.0, 25.0, 0.0),
+                                      child: Row(
                                         mainAxisSize: MainAxisSize.max,
                                         mainAxisAlignment:
-                                            MainAxisAlignment.spaceEvenly,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
+                                            MainAxisAlignment.spaceBetween,
                                         children: [
-                                          Padding(
-                                            padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
-                                                    10.0, 0.0, 0.0, 0.0),
-                                            child: Container(
-                                              width: MediaQuery.sizeOf(context)
-                                                      .width *
-                                                  0.15,
-                                              height: MediaQuery.sizeOf(context)
-                                                      .width *
-                                                  0.15,
-                                              clipBehavior: Clip.antiAlias,
-                                              decoration: const BoxDecoration(
-                                                shape: BoxShape.circle,
-                                              ),
-                                              child: Image.network(
-                                                'https://picsum.photos/seed/707/600',
-                                                fit: BoxFit.cover,
-                                              ),
-                                            ),
-                                          ),
-                                          Padding(
-                                            padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
-                                                    15.0, 0.0, 0.0, 0.0),
-                                            child: Column(
-                                              mainAxisSize: MainAxisSize.max,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
+                                          RichText(
+                                            textScaler: MediaQuery.of(context)
+                                                .textScaler,
+                                            text: TextSpan(
                                               children: [
-                                                Text(
-                                                  columnUsersRecord.displayName,
+                                                TextSpan(
+                                                  text: '₡',
                                                   style: FlutterFlowTheme.of(
                                                           context)
                                                       .bodyMedium
                                                       .override(
                                                         fontFamily: 'Inter',
+                                                        fontSize: 22.0,
                                                         letterSpacing: 0.0,
                                                         fontWeight:
-                                                            FontWeight.w800,
+                                                            FontWeight.w500,
                                                       ),
                                                 ),
-                                                const Row(
+                                                TextSpan(
+                                                  text: valueOrDefault<String>(
+                                                    widget.precio,
+                                                    '00',
+                                                  ),
+                                                  style: const TextStyle(),
+                                                )
+                                              ],
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily: 'Inter',
+                                                        fontSize: 22.0,
+                                                        letterSpacing: 0.0,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                      ),
+                                            ),
+                                          ),
+                                          Align(
+                                            alignment:
+                                                const AlignmentDirectional(-1.0, 0.0),
+                                            child: Container(
+                                              height: 100.0,
+                                              decoration: BoxDecoration(
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryText,
+                                                borderRadius:
+                                                    BorderRadius.circular(24.0),
+                                              ),
+                                              child: InkWell(
+                                                splashColor: Colors.transparent,
+                                                focusColor: Colors.transparent,
+                                                hoverColor: Colors.transparent,
+                                                highlightColor:
+                                                    Colors.transparent,
+                                                onTap: () async {
+                                                  await actions.addToCart(
+                                                    currentUserUid,
+                                                    paginaProductosProductosRecord!
+                                                        .sku,
+                                                    1,
+                                                  );
+                                                },
+                                                child: Row(
                                                   mainAxisSize:
                                                       MainAxisSize.max,
-                                                  children: [],
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceEvenly,
+                                                  children: [
+                                                    Align(
+                                                      alignment:
+                                                          const AlignmentDirectional(
+                                                              0.0, 0.0),
+                                                      child: InkWell(
+                                                        splashColor:
+                                                            Colors.transparent,
+                                                        focusColor:
+                                                            Colors.transparent,
+                                                        hoverColor:
+                                                            Colors.transparent,
+                                                        highlightColor:
+                                                            Colors.transparent,
+                                                        onTap: () async {
+                                                          context.pushNamed(
+                                                              'shoppingCart');
+                                                        },
+                                                        child: Text(
+                                                          'Añadir al Carrito',
+                                                          style: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .bodyMedium
+                                                              .override(
+                                                                fontFamily:
+                                                                    'Inter',
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .primaryBackground,
+                                                                fontSize: 20.0,
+                                                                letterSpacing:
+                                                                    0.0,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold,
+                                                              ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    const Icon(
+                                                      Icons
+                                                          .add_shopping_cart_sharp,
+                                                      color: Color(0xFFF8FAFC),
+                                                      size: 26.0,
+                                                    ),
+                                                  ],
                                                 ),
-                                              ],
+                                              ),
                                             ),
                                           ),
                                         ],
                                       ),
-                                    ],
+                                    ),
                                   ),
-                                  Text(
-                                    listViewReviewsRecord.review,
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .override(
-                                          fontFamily: 'Inter',
-                                          letterSpacing: 0.0,
-                                        ),
-                                  ),
-                                ],
-                              );
-                            },
-                          );
-                        },
-                      ),
-                    ),
-                    Padding(
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 125.0, 0.0, 0.0),
-                      child: InkWell(
-                        splashColor: Colors.transparent,
-                        focusColor: Colors.transparent,
-                        hoverColor: Colors.transparent,
-                        highlightColor: Colors.transparent,
-                        onTap: () async {
-                          context.pushNamed('shoppingCart');
-                        },
-                        child: wrapWithModel(
-                          model: _model.addToCartModel,
-                          updateCallback: () => safeSetState(() {}),
-                          child: AddToCartWidget(
-                            productCompRef: widget.productRef!,
+                                ),
+                              ),
+                            ],
                           ),
-                        ),
+                        ],
                       ),
                     ),
                   ],

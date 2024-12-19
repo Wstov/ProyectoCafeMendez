@@ -10,10 +10,10 @@ class AccesoModel extends FlutterFlowModel<AccesoWidget> {
   int get tabBarCurrentIndex =>
       tabBarController != null ? tabBarController!.index : 0;
 
-  // State field(s) for txtNombre widget.
-  FocusNode? txtNombreFocusNode;
-  TextEditingController? txtNombreTextController;
-  String? Function(BuildContext, String?)? txtNombreTextControllerValidator;
+  // State field(s) for txtNameCreate widget.
+  FocusNode? txtNameCreateFocusNode;
+  TextEditingController? txtNameCreateTextController;
+  String? Function(BuildContext, String?)? txtNameCreateTextControllerValidator;
   // State field(s) for emailAddress_Create widget.
   FocusNode? emailAddressCreateFocusNode;
   TextEditingController? emailAddressCreateTextController;
@@ -51,8 +51,8 @@ class AccesoModel extends FlutterFlowModel<AccesoWidget> {
   @override
   void dispose() {
     tabBarController?.dispose();
-    txtNombreFocusNode?.dispose();
-    txtNombreTextController?.dispose();
+    txtNameCreateFocusNode?.dispose();
+    txtNameCreateTextController?.dispose();
 
     emailAddressCreateFocusNode?.dispose();
     emailAddressCreateTextController?.dispose();

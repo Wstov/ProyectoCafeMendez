@@ -1,4 +1,5 @@
 import '/auth/firebase_auth/auth_util.dart';
+import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -34,8 +35,8 @@ class _AccesoWidgetState extends State<AccesoWidget>
       length: 2,
       initialIndex: 0,
     )..addListener(() => safeSetState(() {}));
-    _model.txtNombreTextController ??= TextEditingController();
-    _model.txtNombreFocusNode ??= FocusNode();
+    _model.txtNameCreateTextController ??= TextEditingController();
+    _model.txtNameCreateFocusNode ??= FocusNode();
 
     _model.emailAddressCreateTextController ??= TextEditingController();
     _model.emailAddressCreateFocusNode ??= FocusNode();
@@ -321,9 +322,9 @@ class _AccesoWidgetState extends State<AccesoWidget>
                                                       width: double.infinity,
                                                       child: TextFormField(
                                                         controller: _model
-                                                            .txtNombreTextController,
+                                                            .txtNameCreateTextController,
                                                         focusNode: _model
-                                                            .txtNombreFocusNode,
+                                                            .txtNameCreateFocusNode,
                                                         autofocus: true,
                                                         autofillHints: const [
                                                           AutofillHints.email
@@ -420,7 +421,7 @@ class _AccesoWidgetState extends State<AccesoWidget>
                                                             TextInputType
                                                                 .emailAddress,
                                                         validator: _model
-                                                            .txtNombreTextControllerValidator
+                                                            .txtNameCreateTextControllerValidator
                                                             .asValidator(
                                                                 context),
                                                       ),
@@ -861,16 +862,32 @@ class _AccesoWidgetState extends State<AccesoWidget>
                                                             return;
                                                           }
 
-                                                          if (valueOrDefault<
-                                                                  bool>(
-                                                              currentUserDocument
-                                                                  ?.isAdmin,
-                                                              false)) {
-                                                            context.pushNamedAuth(
-                                                                'AdminHome',
-                                                                context
-                                                                    .mounted);
-                                                          }
+                                                          await UsersRecord
+                                                              .collection
+                                                              .doc(user.uid)
+                                                              .update(
+                                                                  createUsersRecordData(
+                                                                displayName: _model
+                                                                    .txtNameCreateTextController
+                                                                    .text,
+                                                                isAdmin: false,
+                                                              ));
+
+                                                          context.pushNamedAuth(
+                                                            'HomePage',
+                                                            context.mounted,
+                                                            extra: <String,
+                                                                dynamic>{
+                                                              kTransitionInfoKey:
+                                                                  const TransitionInfo(
+                                                                hasTransition:
+                                                                    true,
+                                                                transitionType:
+                                                                    PageTransitionType
+                                                                        .topToBottom,
+                                                              ),
+                                                            },
+                                                          );
                                                         },
                                                         text: 'Crear Cuenta',
                                                         options:
@@ -1009,7 +1026,7 @@ class _AccesoWidgetState extends State<AccesoWidget>
                                                                     }
 
                                                                     context.goNamedAuth(
-                                                                        'shoppingCart',
+                                                                        'HomePage',
                                                                         context
                                                                             .mounted);
                                                                   },
@@ -1093,7 +1110,7 @@ class _AccesoWidgetState extends State<AccesoWidget>
                                                                           }
 
                                                                           context.goNamedAuth(
-                                                                              'shoppingCart',
+                                                                              'HomePage',
                                                                               context.mounted);
                                                                         },
                                                                         text:
@@ -1510,11 +1527,61 @@ class _AccesoWidgetState extends State<AccesoWidget>
                                                               currentUserDocument
                                                                   ?.isAdmin,
                                                               false)) {
-                                                            context.pushNamedAuth(
-                                                                'AdminHome',
-                                                                context
-                                                                    .mounted);
+                                                            context
+                                                                .pushNamedAuth(
+                                                              'AdminHome',
+                                                              context.mounted,
+                                                              extra: <String,
+                                                                  dynamic>{
+                                                                kTransitionInfoKey:
+                                                                    const TransitionInfo(
+                                                                  hasTransition:
+                                                                      true,
+                                                                  transitionType:
+                                                                      PageTransitionType
+                                                                          .topToBottom,
+                                                                ),
+                                                              },
+                                                            );
+                                                          } else {
+                                                            context
+                                                                .pushNamedAuth(
+                                                              'HomePage',
+                                                              context.mounted,
+                                                              extra: <String,
+                                                                  dynamic>{
+                                                                kTransitionInfoKey:
+                                                                    const TransitionInfo(
+                                                                  hasTransition:
+                                                                      true,
+                                                                  transitionType:
+                                                                      PageTransitionType
+                                                                          .topToBottom,
+                                                                ),
+                                                              },
+                                                            );
                                                           }
+
+                                                          safeSetState(() {
+                                                            _model
+                                                                .emailAddressCreateTextController
+                                                                ?.clear();
+                                                            _model
+                                                                .passwordCreateTextController
+                                                                ?.clear();
+                                                            _model
+                                                                .passwordConfirTextController
+                                                                ?.clear();
+                                                            _model
+                                                                .passwordTextController
+                                                                ?.clear();
+                                                            _model
+                                                                .emailAddressTextController
+                                                                ?.clear();
+                                                            _model
+                                                                .txtNameCreateTextController
+                                                                ?.clear();
+                                                          });
                                                         },
                                                         text: 'Ingresar',
                                                         options:
@@ -1653,7 +1720,7 @@ class _AccesoWidgetState extends State<AccesoWidget>
                                                                     }
 
                                                                     context.goNamedAuth(
-                                                                        'shoppingCart',
+                                                                        'HomePage',
                                                                         context
                                                                             .mounted);
                                                                   },
@@ -1737,7 +1804,7 @@ class _AccesoWidgetState extends State<AccesoWidget>
                                                                           }
 
                                                                           context.goNamedAuth(
-                                                                              'shoppingCart',
+                                                                              'HomePage',
                                                                               context.mounted);
                                                                         },
                                                                         text:
@@ -1809,22 +1876,30 @@ class _AccesoWidgetState extends State<AccesoWidget>
                                                           child: FFButtonWidget(
                                                             onPressed:
                                                                 () async {
-                                                              GoRouter.of(
-                                                                      context)
-                                                                  .prepareAuthEvent();
-                                                              final user =
-                                                                  await authManager
-                                                                      .signInWithGoogle(
-                                                                          context);
-                                                              if (user ==
-                                                                  null) {
+                                                              if (_model
+                                                                  .emailAddressTextController
+                                                                  .text
+                                                                  .isEmpty) {
+                                                                ScaffoldMessenger.of(
+                                                                        context)
+                                                                    .showSnackBar(
+                                                                  const SnackBar(
+                                                                    content:
+                                                                        Text(
+                                                                      'Email required!',
+                                                                    ),
+                                                                  ),
+                                                                );
                                                                 return;
                                                               }
-
-                                                              context.goNamedAuth(
-                                                                  'shoppingCart',
-                                                                  context
-                                                                      .mounted);
+                                                              await authManager
+                                                                  .resetPassword(
+                                                                email: _model
+                                                                    .emailAddressTextController
+                                                                    .text,
+                                                                context:
+                                                                    context,
+                                                              );
                                                             },
                                                             text:
                                                                 'Olvidaste tu contraseña?',

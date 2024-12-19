@@ -8,12 +8,7 @@ import 'confirmacion_pago_model.dart';
 export 'confirmacion_pago_model.dart';
 
 class ConfirmacionPagoWidget extends StatefulWidget {
-  const ConfirmacionPagoWidget({
-    super.key,
-    required this.compraref,
-  });
-
-  final DocumentReference? compraref;
+  const ConfirmacionPagoWidget({super.key});
 
   @override
   State<ConfirmacionPagoWidget> createState() => _ConfirmacionPagoWidgetState();
@@ -85,10 +80,19 @@ class _ConfirmacionPagoWidgetState extends State<ConfirmacionPagoWidget> {
                   Padding(
                     padding:
                         const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 10.0, 0.0),
-                    child: Icon(
-                      Icons.shopping_cart,
-                      color: FlutterFlowTheme.of(context).primaryText,
-                      size: 24.0,
+                    child: InkWell(
+                      splashColor: Colors.transparent,
+                      focusColor: Colors.transparent,
+                      hoverColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
+                      onTap: () async {
+                        context.pushNamed('shoppingCart');
+                      },
+                      child: Icon(
+                        Icons.shopping_cart,
+                        color: FlutterFlowTheme.of(context).primaryText,
+                        size: 24.0,
+                      ),
                     ),
                   ),
                   Padding(

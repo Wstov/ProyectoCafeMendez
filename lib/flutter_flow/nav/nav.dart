@@ -15,6 +15,8 @@ export 'serialization_util.dart';
 
 const kTransitionInfoKey = '__transition_info__';
 
+GlobalKey<NavigatorState> appNavigatorKey = GlobalKey<NavigatorState>();
+
 class AppStateNotifier extends ChangeNotifier {
   AppStateNotifier._();
 
@@ -72,14 +74,15 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       initialLocation: '/',
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
+      navigatorKey: appNavigatorKey,
       errorBuilder: (context, state) =>
-          appStateNotifier.loggedIn ? const ShoppingCartWidget() : const FaqsWidget(),
+          appStateNotifier.loggedIn ? const HomePageWidget() : const AccesoWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
           builder: (context, _) =>
-              appStateNotifier.loggedIn ? const ShoppingCartWidget() : const FaqsWidget(),
+              appStateNotifier.loggedIn ? const HomePageWidget() : const AccesoWidget(),
         ),
         FFRoute(
           name: 'HomePage',
@@ -105,18 +108,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'Index',
           path: '/index',
           builder: (context, params) => const IndexWidget(),
-        ),
-        FFRoute(
-          name: 'PaginaProductos',
-          path: '/paginaProductos',
-          builder: (context, params) => PaginaProductosWidget(
-            productRef: params.getParam(
-              'productRef',
-              ParamType.DocumentReference,
-              isList: false,
-              collectionNamePath: ['productos'],
-            ),
-          ),
         ),
         FFRoute(
           name: 'EditarProducto',
@@ -155,14 +146,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'confirmacionPago',
           path: '/confirmacionPago',
-          builder: (context, params) => ConfirmacionPagoWidget(
-            compraref: params.getParam(
-              'compraref',
-              ParamType.DocumentReference,
-              isList: false,
-              collectionNamePath: ['productos'],
-            ),
-          ),
+          builder: (context, params) => const ConfirmacionPagoWidget(),
         ),
         FFRoute(
           name: 'Recetas',
@@ -178,6 +162,53 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'PumpkinSpice',
           path: '/pumpkinSpice',
           builder: (context, params) => const PumpkinSpiceWidget(),
+        ),
+        FFRoute(
+          name: 'AdminUsuarios',
+          path: '/adminUsuarios',
+          builder: (context, params) => const AdminUsuariosWidget(),
+        ),
+        FFRoute(
+          name: 'EditarUsuario',
+          path: '/editarUsuario',
+          asyncParams: {
+            'parametrosUsuario': getDoc(['users'], UsersRecord.fromSnapshot),
+          },
+          builder: (context, params) => EditarUsuarioWidget(
+            parametrosUsuario: params.getParam(
+              'parametrosUsuario',
+              ParamType.Document,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: 'allProducts',
+          path: '/allProducts',
+          builder: (context, params) => const AllProductsWidget(),
+        ),
+        FFRoute(
+          name: 'PaginaProductos',
+          path: '/paginaProductos',
+          asyncParams: {
+            'datosProducto':
+                getDoc(['productos'], ProductosRecord.fromSnapshot),
+          },
+          builder: (context, params) => PaginaProductosWidget(
+            datosProducto: params.getParam(
+              'datosProducto',
+              ParamType.Document,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: 'pago',
+          path: '/pago',
+          builder: (context, params) => const PagoWidget(),
+        ),
+        FFRoute(
+          name: 'AboutUS',
+          path: '/aboutUS',
+          builder: (context, params) => const AboutUSWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
@@ -348,7 +379,7 @@ class FFRoute {
 
           if (requireAuth && !appStateNotifier.loggedIn) {
             appStateNotifier.setRedirectLocationIfUnset(state.uri.toString());
-            return '/faqs';
+            return '/acceso';
           }
           return null;
         },

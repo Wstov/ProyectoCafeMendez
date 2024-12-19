@@ -33,3 +33,13 @@ double? priceSummary(List<double>? allPrices) {
   }
   return sum;
 }
+
+double? calculateTotal(List<double> prices) {
+  double total = 0.0;
+
+  for (double price in prices) {
+    total += price;
+  }
+
+  return total;
+}

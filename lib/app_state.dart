@@ -118,6 +118,12 @@ class FFAppState extends ChangeNotifier {
     prefs.setStringList(
         'ff_cartSummary', _cartSummary.map((x) => x.toString()).toList());
   }
+
+  double _totalPrice = 0.0;
+  double get totalPrice => _totalPrice;
+  set totalPrice(double value) {
+    _totalPrice = value;
+  }
 }
 
 void _safeInit(Function() initializeField) {

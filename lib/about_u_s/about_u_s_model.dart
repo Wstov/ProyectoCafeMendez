@@ -1,8 +1,8 @@
 import '/flutter_flow/flutter_flow_util.dart';
-import 'shopping_cart_widget.dart' show ShoppingCartWidget;
+import 'about_u_s_widget.dart' show AboutUSWidget;
 import 'package:flutter/material.dart';
 
-class ShoppingCartModel extends FlutterFlowModel<ShoppingCartWidget> {
+class AboutUSModel extends FlutterFlowModel<AboutUSWidget> {
   @override
   void initState(BuildContext context) {}
 

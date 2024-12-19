@@ -1,26 +1,28 @@
+import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
-import 'metodos_extraccion_model.dart';
-export 'metodos_extraccion_model.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
+import 'all_products_model.dart';
+export 'all_products_model.dart';
 
-class MetodosExtraccionWidget extends StatefulWidget {
-  const MetodosExtraccionWidget({super.key});
+class AllProductsWidget extends StatefulWidget {
+  const AllProductsWidget({super.key});
 
   @override
-  State<MetodosExtraccionWidget> createState() =>
-      _MetodosExtraccionWidgetState();
+  State<AllProductsWidget> createState() => _AllProductsWidgetState();
 }
 
-class _MetodosExtraccionWidgetState extends State<MetodosExtraccionWidget> {
-  late MetodosExtraccionModel _model;
+class _AllProductsWidgetState extends State<AllProductsWidget> {
+  late AllProductsModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => MetodosExtraccionModel());
+    _model = createModel(context, () => AllProductsModel());
   }
 
   @override
@@ -50,22 +52,13 @@ class _MetodosExtraccionWidgetState extends State<MetodosExtraccionWidget> {
             title: Column(
               mainAxisSize: MainAxisSize.max,
               children: [
-                InkWell(
-                  splashColor: Colors.transparent,
-                  focusColor: Colors.transparent,
-                  hoverColor: Colors.transparent,
-                  highlightColor: Colors.transparent,
-                  onTap: () async {
-                    context.pushNamed('Index');
-                  },
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(8.0),
-                    child: Image.asset(
-                      'assets/images/logo-removebg-preview_(3).png',
-                      width: 114.0,
-                      height: 66.0,
-                      fit: BoxFit.contain,
-                    ),
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(8.0),
+                  child: Image.asset(
+                    'assets/images/logo-removebg-preview_(3).png',
+                    width: 114.0,
+                    height: 66.0,
+                    fit: BoxFit.contain,
                   ),
                 ),
               ],
@@ -78,19 +71,10 @@ class _MetodosExtraccionWidgetState extends State<MetodosExtraccionWidget> {
                   Padding(
                     padding:
                         const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 10.0, 0.0),
-                    child: InkWell(
-                      splashColor: Colors.transparent,
-                      focusColor: Colors.transparent,
-                      hoverColor: Colors.transparent,
-                      highlightColor: Colors.transparent,
-                      onTap: () async {
-                        context.pushNamed('shoppingCart');
-                      },
-                      child: Icon(
-                        Icons.shopping_cart,
-                        color: FlutterFlowTheme.of(context).primaryText,
-                        size: 24.0,
-                      ),
+                    child: Icon(
+                      Icons.shopping_cart,
+                      color: FlutterFlowTheme.of(context).primaryText,
+                      size: 24.0,
                     ),
                   ),
                   Padding(
@@ -148,16 +132,19 @@ class _MetodosExtraccionWidgetState extends State<MetodosExtraccionWidget> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            'Metodos de Filtrado',
-                            style: FlutterFlowTheme.of(context)
-                                .labelSmall
-                                .override(
-                                  fontFamily: 'Inter',
-                                  fontSize: 18.0,
-                                  letterSpacing: 0.0,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                          Row(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Text(
+                                'Todos los Productos',
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .override(
+                                      fontFamily: 'Inter',
+                                      letterSpacing: 0.0,
+                                    ),
+                              ),
+                            ].divide(const SizedBox(width: 4.0)),
                           ),
                         ].divide(const SizedBox(height: 4.0)),
                       ),
@@ -171,519 +158,233 @@ class _MetodosExtraccionWidgetState extends State<MetodosExtraccionWidget> {
                 desktop: false,
               ))
                 Expanded(
-                  child: ListView(
+                  child: PagedListView<DocumentSnapshot<Object?>?,
+                      ProductosRecord>.separated(
+                    pagingController: _model.setListViewMobileController(
+                      ProductosRecord.collection,
+                    ),
                     padding: const EdgeInsets.fromLTRB(
                       0,
                       12.0,
                       0,
                       44.0,
                     ),
+                    reverse: false,
                     scrollDirection: Axis.vertical,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsetsDirectional.fromSTEB(
-                            16.0, 0.0, 16.0, 0.0),
-                        child: Container(
-                          width: double.infinity,
-                          constraints: const BoxConstraints(
-                            maxWidth: 800.0,
-                          ),
-                          decoration: BoxDecoration(
-                            color: FlutterFlowTheme.of(context)
-                                .secondaryBackground,
-                            borderRadius: BorderRadius.circular(12.0),
-                            border: Border.all(
-                              color: FlutterFlowTheme.of(context).alternate,
-                              width: 1.0,
+                    separatorBuilder: (_, __) => const SizedBox(height: 12.0),
+                    builderDelegate: PagedChildBuilderDelegate<ProductosRecord>(
+                      // Customize what your widget looks like when it's loading the first page.
+                      firstPageProgressIndicatorBuilder: (_) => Center(
+                        child: SizedBox(
+                          width: 50.0,
+                          height: 50.0,
+                          child: CircularProgressIndicator(
+                            valueColor: AlwaysStoppedAnimation<Color>(
+                              FlutterFlowTheme.of(context).primary,
                             ),
                           ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Column(
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                ClipRRect(
-                                  borderRadius: BorderRadius.circular(4.0),
-                                  child: Image.network(
-                                    'https://i0.wp.com/stag.mercato.cr/wp-content/uploads/2022/06/IMG_8477-1.jpg?fit=1200%2C800',
-                                    width: double.infinity,
-                                    height: 185.0,
-                                    fit: BoxFit.cover,
+                        ),
+                      ),
+                      // Customize what your widget looks like when it's loading another page.
+                      newPageProgressIndicatorBuilder: (_) => Center(
+                        child: SizedBox(
+                          width: 50.0,
+                          height: 50.0,
+                          child: CircularProgressIndicator(
+                            valueColor: AlwaysStoppedAnimation<Color>(
+                              FlutterFlowTheme.of(context).primary,
+                            ),
+                          ),
+                        ),
+                      ),
+
+                      itemBuilder: (context, _, listViewMobileIndex) {
+                        final listViewMobileProductosRecord = _model
+                            .listViewMobilePagingController!
+                            .itemList![listViewMobileIndex];
+                        return Padding(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
+                              16.0, 0.0, 16.0, 0.0),
+                          child: Container(
+                            width: double.infinity,
+                            constraints: const BoxConstraints(
+                              maxWidth: 800.0,
+                            ),
+                            decoration: BoxDecoration(
+                              color: FlutterFlowTheme.of(context)
+                                  .secondaryBackground,
+                              borderRadius: BorderRadius.circular(12.0),
+                              border: Border.all(
+                                color: FlutterFlowTheme.of(context).alternate,
+                                width: 1.0,
+                              ),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  ClipRRect(
+                                    borderRadius: BorderRadius.circular(4.0),
+                                    child: Image.network(
+                                      listViewMobileProductosRecord.imagen,
+                                      width: double.infinity,
+                                      height: 200.0,
+                                      fit: BoxFit.cover,
+                                    ),
                                   ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(4.0),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Expanded(
-                                        child: Column(
-                                          mainAxisSize: MainAxisSize.max,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            RichText(
-                                              textScaler: MediaQuery.of(context)
-                                                  .textScaler,
-                                              text: TextSpan(
-                                                children: const [
-                                                  TextSpan(
-                                                    text: 'Pais de Origen',
-                                                    style: TextStyle(),
-                                                  ),
-                                                  TextSpan(
-                                                    text: ' || ',
-                                                    style: TextStyle(),
-                                                  ),
-                                                  TextSpan(
-                                                    text: 'Costa Rica',
-                                                    style: TextStyle(),
-                                                  ),
-                                                  TextSpan(
-                                                    text: ' || ',
-                                                    style: TextStyle(),
-                                                  ),
-                                                  TextSpan(
-                                                    text: 'Vandola',
-                                                    style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.w500,
+                                  Padding(
+                                    padding: const EdgeInsets.all(4.0),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Expanded(
+                                          child: Column(
+                                            mainAxisSize: MainAxisSize.max,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              RichText(
+                                                textScaler:
+                                                    MediaQuery.of(context)
+                                                        .textScaler,
+                                                text: TextSpan(
+                                                  children: [
+                                                    TextSpan(
+                                                      text:
+                                                          listViewMobileProductosRecord
+                                                              .presentacion,
+                                                      style: const TextStyle(),
                                                     ),
-                                                  )
-                                                ],
+                                                    const TextSpan(
+                                                      text: ' || ',
+                                                      style: TextStyle(),
+                                                    ),
+                                                    TextSpan(
+                                                      text:
+                                                          listViewMobileProductosRecord
+                                                              .tipoGrano,
+                                                      style: const TextStyle(),
+                                                    )
+                                                  ],
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .labelSmall
+                                                      .override(
+                                                        fontFamily: 'Inter',
+                                                        letterSpacing: 0.0,
+                                                      ),
+                                                ),
+                                              ),
+                                              Text(
+                                                listViewMobileProductosRecord
+                                                    .nombre,
                                                 style:
                                                     FlutterFlowTheme.of(context)
-                                                        .labelSmall
+                                                        .bodyLarge
                                                         .override(
                                                           fontFamily: 'Inter',
                                                           letterSpacing: 0.0,
                                                         ),
                                               ),
-                                            ),
-                                            Text(
-                                              ' método tradicional costarricense para preparar café. Es una jarra de cerámica con un diseño inspirado en el arte precolombino.',
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyLarge
-                                                      .override(
-                                                        fontFamily: 'Inter',
-                                                        fontSize: 12.0,
-                                                        letterSpacing: 0.0,
-                                                      ),
-                                            ),
-                                          ].divide(const SizedBox(height: 4.0)),
-                                        ),
-                                      ),
-                                      RichText(
-                                        textScaler:
-                                            MediaQuery.of(context).textScaler,
-                                        text: TextSpan(
-                                          children: const [
-                                            TextSpan(
-                                              text: 'Rating:',
-                                              style: TextStyle(),
-                                            ),
-                                            TextSpan(
-                                              text: ' 4.5',
-                                              style: TextStyle(),
-                                            )
-                                          ],
-                                          style: FlutterFlowTheme.of(context)
-                                              .labelSmall
-                                              .override(
-                                                fontFamily: 'Inter',
-                                                letterSpacing: 0.0,
-                                              ),
-                                        ),
-                                      ),
-                                    ].divide(const SizedBox(width: 8.0)),
-                                  ),
-                                ),
-                              ].divide(const SizedBox(height: 8.0)),
-                            ),
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsetsDirectional.fromSTEB(
-                            16.0, 0.0, 16.0, 0.0),
-                        child: Container(
-                          width: double.infinity,
-                          constraints: const BoxConstraints(
-                            maxWidth: 800.0,
-                          ),
-                          decoration: BoxDecoration(
-                            color: FlutterFlowTheme.of(context)
-                                .secondaryBackground,
-                            borderRadius: BorderRadius.circular(12.0),
-                            border: Border.all(
-                              color: FlutterFlowTheme.of(context).alternate,
-                              width: 1.0,
-                            ),
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Column(
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                ClipRRect(
-                                  borderRadius: BorderRadius.circular(4.0),
-                                  child: Image.network(
-                                    'https://koficafe.com/cdn/shop/articles/prensa_francesa.jpg?v=1709714618',
-                                    width: double.infinity,
-                                    height: 186.0,
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(4.0),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Expanded(
-                                        child: Column(
-                                          mainAxisSize: MainAxisSize.max,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            RichText(
-                                              textScaler: MediaQuery.of(context)
-                                                  .textScaler,
-                                              text: TextSpan(
-                                                children: const [
-                                                  TextSpan(
-                                                    text: 'Pais de Origen',
-                                                    style: TextStyle(),
-                                                  ),
-                                                  TextSpan(
-                                                    text: ' || ',
-                                                    style: TextStyle(),
-                                                  ),
-                                                  TextSpan(
-                                                    text: 'Francia',
-                                                    style: TextStyle(),
-                                                  ),
-                                                  TextSpan(
-                                                    text: ' || ',
-                                                    style: TextStyle(),
-                                                  ),
-                                                  TextSpan(
-                                                    text: 'Prensa Francesa',
-                                                    style: TextStyle(),
-                                                  )
-                                                ],
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .labelSmall
+                                              Padding(
+                                                padding: const EdgeInsetsDirectional
+                                                    .fromSTEB(
+                                                        0.0, 15.0, 0.0, 0.0),
+                                                child: FFButtonWidget(
+                                                  onPressed: () async {
+                                                    context.pushNamed(
+                                                      'PaginaProductos',
+                                                      queryParameters: {
+                                                        'datosProducto':
+                                                            serializeParam(
+                                                          listViewMobileProductosRecord,
+                                                          ParamType.Document,
+                                                        ),
+                                                      }.withoutNulls,
+                                                      extra: <String, dynamic>{
+                                                        'datosProducto':
+                                                            listViewMobileProductosRecord,
+                                                        kTransitionInfoKey:
+                                                            const TransitionInfo(
+                                                          hasTransition: true,
+                                                          transitionType:
+                                                              PageTransitionType
+                                                                  .topToBottom,
+                                                        ),
+                                                      },
+                                                    );
+                                                  },
+                                                  text: 'Ver más',
+                                                  options: FFButtonOptions(
+                                                    height: 40.0,
+                                                    padding:
+                                                        const EdgeInsetsDirectional
+                                                            .fromSTEB(16.0, 0.0,
+                                                                16.0, 0.0),
+                                                    iconPadding:
+                                                        const EdgeInsetsDirectional
+                                                            .fromSTEB(0.0, 0.0,
+                                                                0.0, 0.0),
+                                                    color: const Color(0xD0EE8B60),
+                                                    textStyle: FlutterFlowTheme
+                                                            .of(context)
+                                                        .titleSmall
                                                         .override(
-                                                          fontFamily: 'Inter',
+                                                          fontFamily:
+                                                              'Inter Tight',
+                                                          color: Colors.white,
                                                           letterSpacing: 0.0,
                                                         ),
+                                                    elevation: 0.0,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8.0),
+                                                  ),
+                                                ),
                                               ),
-                                            ),
-                                            Text(
-                                              'La prensa francesa, también conocida como cafetera de émbolo, tiene su origen en Francia. Fue desarrollada en el siglo XIX y perfeccionada a lo largo de los años',
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyLarge
-                                                      .override(
-                                                        fontFamily: 'Inter',
-                                                        fontSize: 12.0,
-                                                        letterSpacing: 0.0,
-                                                      ),
-                                            ),
-                                          ].divide(const SizedBox(height: 4.0)),
+                                            ].divide(const SizedBox(height: 4.0)),
+                                          ),
                                         ),
-                                      ),
-                                      RichText(
-                                        textScaler:
-                                            MediaQuery.of(context).textScaler,
-                                        text: TextSpan(
-                                          children: const [
-                                            TextSpan(
-                                              text: 'Rating:',
-                                              style: TextStyle(),
-                                            ),
-                                            TextSpan(
-                                              text: ' 4.5',
-                                              style: TextStyle(),
-                                            )
-                                          ],
-                                          style: FlutterFlowTheme.of(context)
-                                              .labelSmall
-                                              .override(
-                                                fontFamily: 'Inter',
-                                                letterSpacing: 0.0,
+                                        RichText(
+                                          textScaler:
+                                              MediaQuery.of(context).textScaler,
+                                          text: TextSpan(
+                                            children: [
+                                              const TextSpan(
+                                                text: 'Precio: ',
+                                                style: TextStyle(),
                                               ),
+                                              TextSpan(
+                                                text:
+                                                    listViewMobileProductosRecord
+                                                        .precio
+                                                        .toString(),
+                                                style: const TextStyle(),
+                                              )
+                                            ],
+                                            style: FlutterFlowTheme.of(context)
+                                                .labelSmall
+                                                .override(
+                                                  fontFamily: 'Inter',
+                                                  letterSpacing: 0.0,
+                                                ),
+                                          ),
                                         ),
-                                      ),
-                                    ].divide(const SizedBox(width: 8.0)),
+                                      ].divide(const SizedBox(width: 8.0)),
+                                    ),
                                   ),
-                                ),
-                              ].divide(const SizedBox(height: 8.0)),
+                                ].divide(const SizedBox(height: 8.0)),
+                              ),
                             ),
                           ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsetsDirectional.fromSTEB(
-                            16.0, 0.0, 16.0, 0.0),
-                        child: Container(
-                          width: double.infinity,
-                          constraints: const BoxConstraints(
-                            maxWidth: 800.0,
-                          ),
-                          decoration: BoxDecoration(
-                            color: FlutterFlowTheme.of(context)
-                                .secondaryBackground,
-                            borderRadius: BorderRadius.circular(12.0),
-                            border: Border.all(
-                              color: FlutterFlowTheme.of(context).alternate,
-                              width: 1.0,
-                            ),
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Column(
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                ClipRRect(
-                                  borderRadius: BorderRadius.circular(4.0),
-                                  child: Image.network(
-                                    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBnNRd-TeB5gaoi6XiVEQhy6xcogofblqY6w&s',
-                                    width: double.infinity,
-                                    height: 200.0,
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(4.0),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Expanded(
-                                        child: Column(
-                                          mainAxisSize: MainAxisSize.max,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            RichText(
-                                              textScaler: MediaQuery.of(context)
-                                                  .textScaler,
-                                              text: TextSpan(
-                                                children: const [
-                                                  TextSpan(
-                                                    text: 'Pais de Origen',
-                                                    style: TextStyle(),
-                                                  ),
-                                                  TextSpan(
-                                                    text: ' || ',
-                                                    style: TextStyle(),
-                                                  ),
-                                                  TextSpan(
-                                                    text: 'Costa Rica',
-                                                    style: TextStyle(),
-                                                  ),
-                                                  TextSpan(
-                                                    text: ' || ',
-                                                    style: TextStyle(),
-                                                  ),
-                                                  TextSpan(
-                                                    text: 'Chorreador',
-                                                    style: TextStyle(),
-                                                  )
-                                                ],
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .labelSmall
-                                                        .override(
-                                                          fontFamily: 'Inter',
-                                                          letterSpacing: 0.0,
-                                                        ),
-                                              ),
-                                            ),
-                                            Text(
-                                              ' La inspiración detrás de su creación fue la necesidad de un método simple y accesible que permitiera extraer los sabores ricos y complejos del café costarricense sin necesidad de máquinas costosas',
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyLarge
-                                                      .override(
-                                                        fontFamily: 'Inter',
-                                                        fontSize: 12.0,
-                                                        letterSpacing: 0.0,
-                                                      ),
-                                            ),
-                                          ].divide(const SizedBox(height: 4.0)),
-                                        ),
-                                      ),
-                                      RichText(
-                                        textScaler:
-                                            MediaQuery.of(context).textScaler,
-                                        text: TextSpan(
-                                          children: const [
-                                            TextSpan(
-                                              text: 'Rating:',
-                                              style: TextStyle(),
-                                            ),
-                                            TextSpan(
-                                              text: ' 4.5',
-                                              style: TextStyle(),
-                                            )
-                                          ],
-                                          style: FlutterFlowTheme.of(context)
-                                              .labelSmall
-                                              .override(
-                                                fontFamily: 'Inter',
-                                                letterSpacing: 0.0,
-                                              ),
-                                        ),
-                                      ),
-                                    ].divide(const SizedBox(width: 8.0)),
-                                  ),
-                                ),
-                              ].divide(const SizedBox(height: 8.0)),
-                            ),
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsetsDirectional.fromSTEB(
-                            16.0, 0.0, 16.0, 0.0),
-                        child: Container(
-                          width: double.infinity,
-                          constraints: const BoxConstraints(
-                            maxWidth: 800.0,
-                          ),
-                          decoration: BoxDecoration(
-                            color: FlutterFlowTheme.of(context)
-                                .secondaryBackground,
-                            borderRadius: BorderRadius.circular(12.0),
-                            border: Border.all(
-                              color: FlutterFlowTheme.of(context).alternate,
-                              width: 1.0,
-                            ),
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Column(
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                ClipRRect(
-                                  borderRadius: BorderRadius.circular(4.0),
-                                  child: Image.network(
-                                    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTRz_DrBBbwC-XwYaFU5CbOA7z_R2NRf5RDlw&s',
-                                    width: double.infinity,
-                                    height: 200.0,
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(4.0),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Expanded(
-                                        child: Column(
-                                          mainAxisSize: MainAxisSize.max,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            RichText(
-                                              textScaler: MediaQuery.of(context)
-                                                  .textScaler,
-                                              text: TextSpan(
-                                                children: const [
-                                                  TextSpan(
-                                                    text: 'Pais de Origen',
-                                                    style: TextStyle(),
-                                                  ),
-                                                  TextSpan(
-                                                    text: ' || ',
-                                                    style: TextStyle(),
-                                                  ),
-                                                  TextSpan(
-                                                    text: 'Italia',
-                                                    style: TextStyle(),
-                                                  ),
-                                                  TextSpan(
-                                                    text: ' || ',
-                                                    style: TextStyle(),
-                                                  ),
-                                                  TextSpan(
-                                                    text: 'Cafetera Italiana',
-                                                    style: TextStyle(),
-                                                  )
-                                                ],
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .labelSmall
-                                                        .override(
-                                                          fontFamily: 'Inter',
-                                                          letterSpacing: 0.0,
-                                                        ),
-                                              ),
-                                            ),
-                                            Text(
-                                              ' fue inventada en Italia en 1933 por el ingeniero Alfonso Bialetti. Inspirado por la tecnología de las máquinas de lavar de la época, Bialetti diseñó una cafetera que utiliza presión de vapor para forzar el agua caliente a través del café molido',
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyLarge
-                                                      .override(
-                                                        fontFamily: 'Inter',
-                                                        fontSize: 12.0,
-                                                        letterSpacing: 0.0,
-                                                      ),
-                                            ),
-                                          ].divide(const SizedBox(height: 4.0)),
-                                        ),
-                                      ),
-                                      RichText(
-                                        textScaler:
-                                            MediaQuery.of(context).textScaler,
-                                        text: TextSpan(
-                                          children: const [
-                                            TextSpan(
-                                              text: 'Rating:',
-                                              style: TextStyle(),
-                                            ),
-                                            TextSpan(
-                                              text: ' 4.5',
-                                              style: TextStyle(),
-                                            )
-                                          ],
-                                          style: FlutterFlowTheme.of(context)
-                                              .labelSmall
-                                              .override(
-                                                fontFamily: 'Inter',
-                                                letterSpacing: 0.0,
-                                              ),
-                                        ),
-                                      ),
-                                    ].divide(const SizedBox(width: 8.0)),
-                                  ),
-                                ),
-                              ].divide(const SizedBox(height: 8.0)),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ].divide(const SizedBox(height: 12.0)),
+                        );
+                      },
+                    ),
                   ),
                 ),
               if (responsiveVisibility(
