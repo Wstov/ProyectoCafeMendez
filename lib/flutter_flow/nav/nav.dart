@@ -209,6 +209,19 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'AboutUS',
           path: '/aboutUS',
           builder: (context, params) => const AboutUSWidget(),
+        ),
+        FFRoute(
+          name: 'ProductPrueba',
+          path: '/productPrueba',
+          asyncParams: {
+            'productos': getDoc(['productos'], ProductosRecord.fromSnapshot),
+          },
+          builder: (context, params) => ProductPruebaWidget(
+            productos: params.getParam(
+              'productos',
+              ParamType.Document,
+            ),
+          ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

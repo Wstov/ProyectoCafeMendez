@@ -7,10 +7,17 @@ class PaginaProductosModel extends FlutterFlowModel<PaginaProductosWidget> {
 
   // State field(s) for RatingBar widget.
   double? ratingBarValue;
+  // State field(s) for txtCantidad widget.
+  FocusNode? txtCantidadFocusNode;
+  TextEditingController? txtCantidadTextController;
+  String? Function(BuildContext, String?)? txtCantidadTextControllerValidator;
 
   @override
   void initState(BuildContext context) {}
 
   @override
-  void dispose() {}
+  void dispose() {
+    txtCantidadFocusNode?.dispose();
+    txtCantidadTextController?.dispose();
+  }
 }

@@ -10,7 +10,12 @@ import 'package:flutter/material.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-Future<void> addToCart(String userId, String productId, int quantity) async {
+Future<void> addToCart(
+  String userId,
+  String productId,
+  int quantity,
+  double price, // Precio por unidad del producto
+) async {
   final cartRef = FirebaseFirestore.instance
       .collection('users')
       .doc(userId)
@@ -20,18 +25,24 @@ Future<void> addToCart(String userId, String productId, int quantity) async {
   final cartDoc = await cartRef.get();
 
   if (cartDoc.exists) {
-    // Incrementa la cantidad si el producto ya está en el carrito
+    // Incrementa la cantidad y recalcula el precio total
+    final currentQuantity = cartDoc.data()?['quantity'] ?? 0;
+    final newQuantity = currentQuantity + quantity;
     await cartRef.update({
       'quantity': FieldValue.increment(quantity),
+      'totalPrice': price * newQuantity,
     });
   } else {
-    // Agrega un nuevo producto al carrito
+    // Agrega un nuevo producto al carrito con el precio total inicial
     await cartRef.set({
       'productId': productId,
       'quantity': quantity,
+      'price': price,
+      'totalPrice': price * quantity,
       'addedAt': FieldValue.serverTimestamp(),
     });
   }
 }
+
 // Set your action name, define your arguments and return parameter,
 // and then add the boilerplate code using the green button on the right!

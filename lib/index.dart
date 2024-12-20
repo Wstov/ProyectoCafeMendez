@@ -7,7 +7,7 @@ export '/pages/admin/admin_home/admin_home_widget.dart' show AdminHomeWidget;
 export '/pages/index/index_widget.dart' show IndexWidget;
 export '/pages/admin/productos/editar_producto/editar_producto_widget.dart'
     show EditarProductoWidget;
-export '/pages/cliente/carrito/shopping_cart/shopping_cart_widget.dart'
+export '/pages/cliente/shopping_cart/shopping_cart_widget.dart'
     show ShoppingCartWidget;
 export '/faqs/faqs_widget.dart' show FaqsWidget;
 export '/contact_us/contact_us_widget.dart' show ContactUsWidget;
@@ -27,3 +27,4 @@ export '/pagina_productos/pagina_productos_widget.dart'
     show PaginaProductosWidget;
 export '/pago/pago_widget.dart' show PagoWidget;
 export '/about_u_s/about_u_s_widget.dart' show AboutUSWidget;
+export '/product_prueba/product_prueba_widget.dart' show ProductPruebaWidget;

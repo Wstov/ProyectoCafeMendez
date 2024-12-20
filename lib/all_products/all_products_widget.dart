@@ -298,16 +298,16 @@ class _AllProductsWidgetState extends State<AllProductsWidget> {
                                                 child: FFButtonWidget(
                                                   onPressed: () async {
                                                     context.pushNamed(
-                                                      'PaginaProductos',
+                                                      'ProductPrueba',
                                                       queryParameters: {
-                                                        'datosProducto':
+                                                        'productos':
                                                             serializeParam(
                                                           listViewMobileProductosRecord,
                                                           ParamType.Document,
                                                         ),
                                                       }.withoutNulls,
                                                       extra: <String, dynamic>{
-                                                        'datosProducto':
+                                                        'productos':
                                                             listViewMobileProductosRecord,
                                                         kTransitionInfoKey:
                                                             const TransitionInfo(
